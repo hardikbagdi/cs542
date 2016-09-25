@@ -7,7 +7,9 @@ package registrationScheduler.store;
 public interface FileDisplayInterface {
 	/**
 	 * Write the generated schedule to an output file
-	 * @param filename Outputfile
+	 * 
+	 * @param filename
+	 *            Outputfile
 	 */
 	public void writeSchedulesToFile(String filename);
 }

@@ -5,9 +5,9 @@ package registrationScheduler.store;
  *
  */
 public interface StdoutDisplayInterface {
-    /**
-     * writing the output to a screen
-     */
-    public void writeScheduleToScreen();
+	/**
+	 * writing the output to a screen
+	 */
+	public void writeScheduleToScreen();
 
-} 
+}
