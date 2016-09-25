@@ -10,7 +10,7 @@ import registrationScheduler.util.Logger.DebugLevel;
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public class CoursePool implements ObjectPool {
+public class CoursePool {
 	private int totalCourses;
 	private int seatsPerCourse;
 	// counters for each course, all objects are same, no unique property so

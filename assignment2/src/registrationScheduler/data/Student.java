@@ -100,10 +100,7 @@ public class Student {
 	 * @return
 	 */
 	public boolean hasAllCourses() {
-		if (coursesAlloted.size() == Student.requriedCourses)
-			return true;
-		else
-			return true;
+		return (coursesAlloted.size() == Student.requriedCourses);
 	}
 
 	/**
@@ -148,7 +145,12 @@ public class Student {
 	}
 
 	public String getOutputString() {
-		return getName() + coursesAlloted;
+		StringBuilder outString = new StringBuilder(this.name + " ");
+		for (Course course : coursesAlloted) {
+			outString.append(course + " ");
+		}
+		outString.append("" + preferenceScore);
+		return outString.toString();
 	}
 
 	/*
@@ -183,10 +185,9 @@ public class Student {
 			sb.append("\n" + name);
 			sb.append("\nPreferences:");
 			sb.append(Arrays.toString(this.preferences));
-			sb.append("\nCourses Allocated:");
-			sb.append("Courseallocatedsize:"+coursesAlloted.size());
-			for(Course c : coursesAlloted)
-				sb.append(c+" ");
+			sb.append("\nCourses Allocated: ");
+			for (Course c : coursesAlloted)
+				sb.append(c + " ");
 			sb.append("\nPreference Score:");
 			sb.append(preferenceScore + "\n");
 		} catch (Exception e) {
