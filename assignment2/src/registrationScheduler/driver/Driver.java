@@ -61,6 +61,7 @@ public class Driver {
 			// only avg score
 			System.out.println("The average preference score is" + results.getAvgPreferenceScore());
 			// entire output to stdout
+			coursePool.toString();
 			results.writeScheduleToScreen();
 			// entire output to file
 			// results.writeSchedulesToFile(args[1]);

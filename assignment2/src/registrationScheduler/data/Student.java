@@ -100,11 +100,10 @@ public class Student {
 	 * @return
 	 */
 	public boolean hasAllCourses() {
-		for (Course c : coursesAlloted) {
-			if (c == null)
-				return false;
-		}
-		return true;
+		if (coursesAlloted.size() == Student.requriedCourses)
+			return true;
+		else
+			return true;
 	}
 
 	/**
@@ -185,7 +184,9 @@ public class Student {
 			sb.append("\nPreferences:");
 			sb.append(Arrays.toString(this.preferences));
 			sb.append("\nCourses Allocated:");
-			sb.append(Arrays.toString(this.coursesAlloted));
+			sb.append("Courseallocatedsize:"+coursesAlloted.size());
+			for(Course c : coursesAlloted)
+				sb.append(c+" ");
 			sb.append("\nPreference Score:");
 			sb.append(preferenceScore + "\n");
 		} catch (Exception e) {

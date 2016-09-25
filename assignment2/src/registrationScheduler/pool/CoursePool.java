@@ -1,5 +1,7 @@
 package registrationScheduler.pool;
 
+import java.util.Arrays;
+
 import registrationScheduler.data.Course;
 import registrationScheduler.util.Logger;
 import registrationScheduler.util.Logger.DebugLevel;
@@ -24,8 +26,9 @@ public class CoursePool implements ObjectPool {
 		totalCourses = totalCourses_in;
 		seatsPerCourse = seatsPerCourse_in;
 		seatCounters = new int[totalCourses];
-		for (int seatCounter : seatCounters)
-			seatCounter = seatsPerCourse;
+		for (int i = 0; i < seatCounters.length; i++) {
+			seatCounters[i] = seatsPerCourse;
+		}
 	}
 
 	public synchronized boolean getCourse(Course course) {
@@ -67,6 +70,7 @@ public class CoursePool implements ObjectPool {
 	 */
 	@Override
 	public String toString() {
+		System.out.print(Arrays.toString(seatCounters));
 		return "\nCourses:" + totalCourses + "\nStudents Per course:" + seatsPerCourse;
 	}
 }

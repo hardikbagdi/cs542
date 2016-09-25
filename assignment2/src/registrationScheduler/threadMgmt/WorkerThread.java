@@ -3,6 +3,8 @@ package registrationScheduler.threadMgmt;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.xml.stream.events.StartDocument;
+
 import registrationScheduler.data.Course;
 import registrationScheduler.data.Student;
 import registrationScheduler.pool.CoursePool;
@@ -49,22 +51,68 @@ public class WorkerThread implements Runnable {
 	 * @see java.lang.Runnable#run()
 	 */
 	public void run() {
+		Student student;
 		try {
 			Logger.writeMessage(threadName + ": run() called.", DebugLevel.THREAD);
 			String line = null;
 			while ((line = fileProcessor.getLine()) != null) {
-				// System.out.println(threadName + " " + line + " " + (++i));
-				students.add(inputParser(line));
+				student = inputParser(line);
+
+				allocate(student);
+				students.add(student);
 			}
-			System.out.println();
-			System.out.println(threadName + students.toString());
-			System.out.println();
+			if (!allStudentsHaveCourses()) {
+				System.out.println("SHIT HAPPENS!");
+				System.exit(1);
+			} else {
+				writeToResults();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
 		} finally {
 
 		}
+	}
+
+	private boolean allStudentsHaveCourses() {
+		int i = 0;
+		for (Student student : students) {
+			if (student.hasAllCourses()){
+				i++;//System.out.println("has all courses:"+student);
+				//continue;
+			}
+			else
+				return false;
+		}
+		
+		return true;
+	}
+
+	private void writeToResults() throws IllegalAccessException {
+		if (!allStudentsHaveCourses())
+			throw new IllegalAccessException();
+		for (Student student : students)
+			results.putStudent(student);
+	}
+
+	private void allocate(Student student) {
+		Course course;
+		try {
+
+			for (int i = 0; i < Student.requriedCourses; i++) {
+				// if the course is available,then give it to him
+				course = student.getCourseByPreferenceRank(i + 1);
+				if (coursePool.getCourse(course)) {
+					student.addCourse(course);				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+		} finally {
+
+		}
+
 	}
 
 	/**
