@@ -1,6 +1,9 @@
 package registrationScheduler.data;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 import registrationScheduler.util.Logger;
 import registrationScheduler.util.Logger.DebugLevel;
 import registrationScheduler.data.Course;
@@ -12,10 +15,10 @@ import registrationScheduler.data.Course;
 
 public class Student {
 	private String name;
-	private static int requriedCourses = 5;
+	public static int requriedCourses = 5;
 	private int preferences[];
 	private int preferenceScore;
-	private Course coursesAlloted[];
+	private List<Course> coursesAlloted;
 
 	/**
 	 * @param name_in
@@ -30,7 +33,7 @@ public class Student {
 		try {
 			this.name = name_in;
 			this.preferences = preferences_in;
-			this.coursesAlloted = new Course[requriedCourses];
+			this.coursesAlloted = new ArrayList<>();
 			this.preferenceScore = -1;
 		} catch (Exception e) {
 			System.err.println("Constructor failed for Student Object.\n");
@@ -57,14 +60,7 @@ public class Student {
 	 * @return
 	 */
 	public Course[] getCoursesAlloted() {
-		return coursesAlloted;
-	}
-
-	/**
-	 * @param courseAllocated_in
-	 */
-	public void setCoursesAlloted(Course[] courseAllocated_in) {
-		coursesAlloted = courseAllocated_in;
+		return (Course[]) coursesAlloted.toArray();
 	}
 
 	/**
@@ -72,6 +68,43 @@ public class Student {
 	 */
 	public int getPreferenceScore() {
 		return preferenceScore;
+	}
+
+	/**
+	 * @param course_in
+	 * @return
+	 */
+	public boolean hasCourse(Course course_in) {
+		if (course_in == null)
+			return false;
+		return this.coursesAlloted.contains(course_in);
+	}
+
+	public boolean addCourse(Course course) {
+		if (course == null)
+			throw new IllegalArgumentException();
+		if (this.hasCourse(course))
+			return false;
+		return this.coursesAlloted.add(course);
+	}
+
+	public boolean removeCourse(Course course) {
+		if (course == null)
+			return true;
+		if (!this.hasCourse(course))
+			return false;
+		return this.coursesAlloted.remove(course);
+	}
+
+	/**
+	 * @return
+	 */
+	public boolean hasAllCourses() {
+		for (Course c : coursesAlloted) {
+			if (c == null)
+				return false;
+		}
+		return true;
 	}
 
 	/**

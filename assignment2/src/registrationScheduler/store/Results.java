@@ -129,7 +129,7 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 	 */
 	@Override
 	public String toString() {
-		for(Student student : students){
+		for (Student student : students) {
 			Logger.writeMessage(student.getOutputString(), DebugLevel.RESULTS_ENTRY);
 		}
 		return "No of students in the result set:" + students.size();
