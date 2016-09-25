@@ -49,7 +49,6 @@ public class WorkerThread implements Runnable {
 	 * @see java.lang.Runnable#run()
 	 */
 	public void run() {
-		int i = 0;
 		try {
 			Logger.writeMessage(threadName + ": run() called.", DebugLevel.THREAD);
 			String line = null;

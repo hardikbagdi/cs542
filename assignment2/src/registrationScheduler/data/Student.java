@@ -1,9 +1,6 @@
 package registrationScheduler.data;
 
 import java.util.Arrays;
-
-import javax.swing.plaf.BorderUIResource.CompoundBorderUIResource;
-
 import registrationScheduler.util.Logger;
 import registrationScheduler.util.Logger.DebugLevel;
 import registrationScheduler.data.Course;
@@ -78,12 +75,15 @@ public class Student {
 	}
 
 	/**
+	 * @throws IllegalAccessException
 	 * 
 	 */
-	public void calculatePreferenceScore() {
+	public void calculatePreferenceScore() throws IllegalAccessException {
 		int sumOfPreference = 0;
-
+		// validation
 		for (Course c : coursesAlloted) {
+			if (c == null)
+				throw new IllegalAccessException();
 			sumOfPreference += preferences[c.getValue()];
 		}
 		preferenceScore = sumOfPreference;
@@ -113,6 +113,28 @@ public class Student {
 		}
 		// http://stackoverflow.com/questions/14319232/get-enum-name-from-enum-value
 		return Course.values()[i];
+	}
+
+	public String getOutputString() {
+		return getName() + coursesAlloted;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	// http://stackoverflow.com/questions/19220691/how-can-i-correctly-remove-an-object-from-arraylist
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		if (this == obj)
+			return true;
+		Student student = (Student) obj;
+		return this.name.equals(student.getName());
 	}
 
 	/*
