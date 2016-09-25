@@ -1,4 +1,4 @@
-package registrationScheduler.coursePool;
+package registrationScheduler.pool;
 
 /**
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)

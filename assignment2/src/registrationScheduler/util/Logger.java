@@ -58,7 +58,7 @@ public class Logger {
 	 */
 	public static void writeMessage(String message, DebugLevel levelIn) {
 		if (levelIn == debugLevel)
-			System.out.println("Logger->"+message);
+			System.out.println("Logger->" + message);
 	}
 
 	/*

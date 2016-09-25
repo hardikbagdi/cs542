@@ -2,7 +2,7 @@ package registrationScheduler.driver;
 
 import java.io.File;
 
-import registrationScheduler.coursePool.CoursePool;
+import registrationScheduler.pool.CoursePool;
 import registrationScheduler.store.Results;
 import registrationScheduler.threadMgmt.CreateWorkers;
 import registrationScheduler.util.FileProcessor;
@@ -31,19 +31,26 @@ public class Driver {
 		try {
 			// validate the inputs
 			validate_inputs(args);
+
 			// take inputs
 			threadCount = (int) Integer.parseInt(args[2]);
 			Logger.setDebugValue((int) Integer.parseInt(args[3]));
+
 			// setup fileProcessor
 			fileProcessor = new FileProcessor(args[0]);
+
 			// setup results
 			results = new Results();
+
 			// setup object pool
 			coursePool = new CoursePool();
+
 			// setup CreateWorkers
 			createWorkers = new CreateWorkers(fileProcessor, results, coursePool);
+
 			// start processing
 			createWorkers.startWorker(threadCount);
+
 			// done processing, print the results
 			results.writeScheduleToScreen();
 			// results.writeSchedulesToFile(args[1]);

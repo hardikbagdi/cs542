@@ -39,7 +39,6 @@ public class FileProcessor {
 			e.printStackTrace();
 			System.exit(1);
 		} finally {
-
 		}
 	}
 
@@ -56,7 +55,6 @@ public class FileProcessor {
 			e.printStackTrace();
 			System.exit(1);
 		} finally {
-
 		}
 		return line;
 	}

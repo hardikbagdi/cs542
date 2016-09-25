@@ -1,6 +1,11 @@
 package registrationScheduler.threadMgmt;
 
-import registrationScheduler.coursePool.CoursePool;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import registrationScheduler.data.Course;
+import registrationScheduler.data.Student;
+import registrationScheduler.pool.CoursePool;
 import registrationScheduler.store.Results;
 import registrationScheduler.util.FileProcessor;
 import registrationScheduler.util.Logger;
@@ -15,6 +20,8 @@ public class WorkerThread implements Runnable {
 	private Results results;
 	private CoursePool coursePool;
 	private String threadName;
+	private Scanner scanner;
+	private ArrayList<Student> students;
 
 	/**
 	 * @param threadName
@@ -32,6 +39,7 @@ public class WorkerThread implements Runnable {
 		fileProcessor = fileProcessor_in;
 		coursePool = coursePool_in;
 		results = results_in;
+		students = new ArrayList<>();
 		return;
 	}
 
@@ -45,14 +53,44 @@ public class WorkerThread implements Runnable {
 		try {
 			Logger.writeMessage(threadName + ": run() called.", DebugLevel.THREAD);
 			String line = null;
-			while ((line = fileProcessor.getLine()) != null)
-				System.out.println(threadName + "   " + line + " " + (++i));
-
+			while ((line = fileProcessor.getLine()) != null) {
+				// System.out.println(threadName + " " + line + " " + (++i));
+				students.add(inputParser(line));
+			}
+			System.out.println();
+			System.out.println(threadName + students.toString());
+			System.out.println();
 		} catch (Exception e) {
-
+			e.printStackTrace();
+			System.exit(1);
 		} finally {
 
 		}
+	}
+
+	/**
+	 * @param line
+	 * @return
+	 */
+	private Student inputParser(String line) {
+		Student student = null;
+		String name;
+		int[] preferences = new int[Course.totalCourses];
+		try {
+			scanner = new Scanner(line);
+			name = scanner.next();
+			for (int i = 0; i < preferences.length; i++) {
+				preferences[i] = scanner.nextInt();
+			}
+			student = new Student(name, preferences);
+		} catch (Exception e) {
+			System.err.println("InputParser failed.\n");
+			e.printStackTrace();
+			System.exit(1);
+		} finally {
+			scanner.close();
+		}
+		return student;
 	}
 
 	/*

@@ -1,6 +1,6 @@
 package registrationScheduler.threadMgmt;
 
-import registrationScheduler.coursePool.CoursePool;
+import registrationScheduler.pool.CoursePool;
 import registrationScheduler.store.Results;
 import registrationScheduler.util.FileProcessor;
 import registrationScheduler.util.Logger;

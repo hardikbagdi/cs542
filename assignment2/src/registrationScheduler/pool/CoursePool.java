@@ -1,4 +1,4 @@
-package registrationScheduler.coursePool;
+package registrationScheduler.pool;
 
 import registrationScheduler.util.Logger;
 import registrationScheduler.util.Logger.DebugLevel;
