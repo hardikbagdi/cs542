@@ -23,7 +23,7 @@ public class WorkerThread implements Runnable {
 	private CoursePool coursePool;
 	private String threadName;
 	private Scanner scanner;
-	private ArrayList<Student> students;
+	private ArrayList<Student> pendingStudents;
 
 	/**
 	 * @param threadName
@@ -41,7 +41,7 @@ public class WorkerThread implements Runnable {
 		fileProcessor = fileProcessor_in;
 		coursePool = coursePool_in;
 		results = results_in;
-		students = new ArrayList<>();
+		pendingStudents = new ArrayList<>();
 		return;
 	}
 
@@ -55,17 +55,21 @@ public class WorkerThread implements Runnable {
 		try {
 			Logger.writeMessage(threadName + ": run() called.", DebugLevel.THREAD);
 			String line = null;
+			int i = 0;
 			while ((line = fileProcessor.getLine()) != null) {
+				i++;
 				student = inputParser(line);
-
 				allocate(student);
-				students.add(student);
+				if (student.hasAllCourses()) {
+					this.writeToResults(student);
+				} else {
+					pendingStudents.add(student);
+				}
 			}
-			if (!allStudentsHaveCourses()) {
-				System.out.println("SHIT HAPPENS!");
-				System.exit(1);
-			} else {
-				writeToResults();
+			System.out.println(threadName+"Records taken up: " + i);
+			while (!pendingStudents.isEmpty()) {
+				System.out.println(threadName+"SHUFFLING in !" + threadName);
+				shuffle();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -75,25 +79,87 @@ public class WorkerThread implements Runnable {
 		}
 	}
 
-	private boolean allStudentsHaveCourses() {
-		int i = 0;
-		for (Student student : students) {
-			if (student.hasAllCourses()){
-				i++;//System.out.println("has all courses:"+student);
-				//continue;
+	private void shuffle() {
+	//	System.out.println("SHUFFLE called-------------");
+		Student studentInNeed = pendingStudents.remove((int) Math.random() * pendingStudents.size());
+		// // try 6th course preference for this unlucky student
+		// Course course = studentInNeed.getCourseByPreferenceRank(6);
+		// if (coursePool.getCourse(course)) {
+		// studentInNeed.addCourse(course);
+		// if (studentInNeed.hasAllCourses()) {
+		// writeToResults(studentInNeed);
+		// return;
+		// }
+		// }
+		// // try 7th preference
+		// course = studentInNeed.getCourseByPreferenceRank(7);
+		// if (coursePool.getCourse(course)) {
+		// studentInNeed.addCourse(course);
+		// if (studentInNeed.hasAllCourses()) {
+		// writeToResults(studentInNeed);
+		// return;
+		// }
+		// }
+		////////////////////////////////////
+		// allocate this unlucky student any courses that are available
+		for (Course course : Course.values()) {
+			if (!studentInNeed.hasAllCourses() && !studentInNeed.hasCourse(course)) {
+				if (coursePool.getCourse(course)) {
+					studentInNeed.addCourse(course);
+				}
 			}
-			else
-				return false;
 		}
-		
-		return true;
+		if (studentInNeed.hasAllCourses()) {
+			writeToResults(studentInNeed);
+			//System.out.println("with random course,done.");
+			return;
+		}
+		// now we will attempt to shuffle courses between students
+		while (!studentInNeed.hasAllCourses()) {
+			// take up a random student who might help our unlucky student
+			Student studentHelper = results.deleteRandomStudent();
+			// get his courses
+			Course[] courses = studentHelper.getCoursesAlloted();
+			for (Course course : courses) {
+				// check if the helper student has any course which the InNeed
+				// student can use
+				if (!studentInNeed.hasCourse(course)) {
+					// helper student can help the inNeed student if helper can get
+					// some other course
+					Course newCourseForHelper = searchCourseForStudent(studentHelper);
+					if (newCourseForHelper != null) {
+						//Fire in the hole!
+						// transfer this course
+						studentHelper.removeCourse(course);
+						studentInNeed.addCourse(course);
+						// give helper student new course
+						studentHelper.addCourse(newCourseForHelper);
+					}
+					else{
+						//helper student herself can't have another course, try another helper student
+					}
+					break;
+				}
+			}
+			// put helper student back in the results no matter what
+			writeToResults(studentHelper);
+		}
+		writeToResults(studentInNeed);
 	}
 
-	private void writeToResults() throws IllegalAccessException {
-		if (!allStudentsHaveCourses())
-			throw new IllegalAccessException();
-		for (Student student : students)
-			results.putStudent(student);
+	private Course searchCourseForStudent(Student studentHelper) {
+//		System.out.println(studentHelper);
+	//	System.out.println(coursePool);
+		for (Course course : Course.values()) {
+			if (!studentHelper.hasCourse(course) && coursePool.getCourse(course)) {
+				return course;
+			}
+		}
+		return null;
+	}
+
+	private void writeToResults(Student student) {
+		results.putStudent(student);
 	}
 
 	private void allocate(Student student) {
@@ -104,7 +170,8 @@ public class WorkerThread implements Runnable {
 				// if the course is available,then give it to him
 				course = student.getCourseByPreferenceRank(i + 1);
 				if (coursePool.getCourse(course)) {
-					student.addCourse(course);				}
+					student.addCourse(course);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

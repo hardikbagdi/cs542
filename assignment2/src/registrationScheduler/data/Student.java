@@ -60,7 +60,8 @@ public class Student {
 	 * @return
 	 */
 	public Course[] getCoursesAlloted() {
-		return (Course[]) coursesAlloted.toArray();
+		//http://stackoverflow.com/questions/5690351/java-stringlist-toarray-gives-classcastexception
+		return (Course[]) coursesAlloted.toArray(new Course[coursesAlloted.size()]);
 	}
 
 	/**

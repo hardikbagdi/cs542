@@ -40,6 +40,12 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 		students.remove(student);
 	}
 
+	public synchronized Student deleteRandomStudent() {
+		Student student = students.get((int) Math.random() * students.size());
+		students.remove(student);
+		return student;
+	}
+
 	public synchronized void updateStudent(Student student) {
 		deleteStudent(student);
 		putStudent(student);
@@ -91,10 +97,11 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 	 */
 	@Override
 	public synchronized void writeScheduleToScreen() {
+		System.out.println("SIZE: " + students.size());
 		for (Student student : students) {
 			System.out.println(student.getOutputString());
 		}
-		System.out.println();
+		System.out.println("The average preference score is" + this.getAvgPreferenceScore());
 	}
 
 	/*
