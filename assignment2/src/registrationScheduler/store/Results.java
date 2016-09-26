@@ -101,7 +101,7 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 		for (Student student : students) {
 			System.out.println(student.getOutputString());
 		}
-		System.out.println("The average preference score is" + this.getAvgPreferenceScore());
+		System.out.println("The average preference score is " + this.getAvgPreferenceScore());
 	}
 
 	/*
@@ -116,6 +116,10 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 		BufferedWriter bufferedWriter = null;
 		try {
 			bufferedWriter = new BufferedWriter(new FileWriter(filename_in));
+			for (Student student : students) {
+				bufferedWriter.write(student.getOutputString() + "\n");
+			}
+			bufferedWriter.write("The average preference score is " + this.getAvgPreferenceScore());
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(1);

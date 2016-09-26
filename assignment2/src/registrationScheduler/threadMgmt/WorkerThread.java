@@ -66,9 +66,7 @@ public class WorkerThread implements Runnable {
 					pendingStudents.add(student);
 				}
 			}
-			System.out.println(threadName+"Records taken up: " + i);
 			while (!pendingStudents.isEmpty()) {
-				System.out.println(threadName+"SHUFFLING in !" + threadName);
 				shuffle();
 			}
 		} catch (Exception e) {
@@ -80,27 +78,7 @@ public class WorkerThread implements Runnable {
 	}
 
 	private void shuffle() {
-	//	System.out.println("SHUFFLE called-------------");
 		Student studentInNeed = pendingStudents.remove((int) Math.random() * pendingStudents.size());
-		// // try 6th course preference for this unlucky student
-		// Course course = studentInNeed.getCourseByPreferenceRank(6);
-		// if (coursePool.getCourse(course)) {
-		// studentInNeed.addCourse(course);
-		// if (studentInNeed.hasAllCourses()) {
-		// writeToResults(studentInNeed);
-		// return;
-		// }
-		// }
-		// // try 7th preference
-		// course = studentInNeed.getCourseByPreferenceRank(7);
-		// if (coursePool.getCourse(course)) {
-		// studentInNeed.addCourse(course);
-		// if (studentInNeed.hasAllCourses()) {
-		// writeToResults(studentInNeed);
-		// return;
-		// }
-		// }
-		////////////////////////////////////
 		// allocate this unlucky student any courses that are available
 		for (Course course : Course.values()) {
 			if (!studentInNeed.hasAllCourses() && !studentInNeed.hasCourse(course)) {
@@ -111,7 +89,6 @@ public class WorkerThread implements Runnable {
 		}
 		if (studentInNeed.hasAllCourses()) {
 			writeToResults(studentInNeed);
-			//System.out.println("with random course,done.");
 			return;
 		}
 		// now we will attempt to shuffle courses between students
@@ -124,19 +101,20 @@ public class WorkerThread implements Runnable {
 				// check if the helper student has any course which the InNeed
 				// student can use
 				if (!studentInNeed.hasCourse(course)) {
-					// helper student can help the inNeed student if helper can get
+					// helper student can help the inNeed student if helper can
+					// get
 					// some other course
 					Course newCourseForHelper = searchCourseForStudent(studentHelper);
 					if (newCourseForHelper != null) {
-						//Fire in the hole!
+						// Fire in the hole!
 						// transfer this course
 						studentHelper.removeCourse(course);
 						studentInNeed.addCourse(course);
 						// give helper student new course
 						studentHelper.addCourse(newCourseForHelper);
-					}
-					else{
-						//helper student herself can't have another course, try another helper student
+					} else {
+						// helper student herself can't have another course, try
+						// another helper student
 					}
 					break;
 				}
@@ -148,8 +126,6 @@ public class WorkerThread implements Runnable {
 	}
 
 	private Course searchCourseForStudent(Student studentHelper) {
-//		System.out.println(studentHelper);
-	//	System.out.println(coursePool);
 		for (Course course : Course.values()) {
 			if (!studentHelper.hasCourse(course) && coursePool.getCourse(course)) {
 				return course;
