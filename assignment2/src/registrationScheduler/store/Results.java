@@ -24,6 +24,10 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 		students = new ArrayList<>();
 	}
 
+	/**
+	 * @param student
+	 * @return none
+	 */
 	public synchronized void putStudent(Student student) {
 		if (student == null)
 			throw new IllegalArgumentException("Cannot add null.");
@@ -33,6 +37,10 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 		students.add(student);
 	}
 
+	/**
+	 * @param student
+	 * @return none
+	 */
 	public synchronized void deleteStudent(Student student) {
 		if (student == null)
 			throw new IllegalArgumentException("Cannot remove null.");
@@ -40,17 +48,28 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 		students.remove(student);
 	}
 
+	/**
+	 * @return Student which was picked up randomly and deleted
+	 */
 	public synchronized Student deleteRandomStudent() {
 		Student student = students.get((int) Math.random() * students.size());
 		students.remove(student);
 		return student;
 	}
 
+	/**
+	 * @param student
+	 * @return none
+	 */
 	public synchronized void updateStudent(Student student) {
 		deleteStudent(student);
 		putStudent(student);
 	}
 
+	/**
+	 * @param student
+	 * @return true if the result set contains the student 
+	 */
 	public synchronized boolean contains(Student student) {
 		if (student == null)
 			return false;
@@ -58,12 +77,15 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 	}
 
 	/**
-	 * @return
+	 * @return A list of all students in the result set
 	 */
 	public synchronized List<Student> getStudents() {
 		return students;
 	}
 
+	/**
+	 * @return true if the avg preferecne score was succesfully generated
+	 */
 	public synchronized boolean calculateAvgPreferenceScore() {
 		float sum = 0;
 		try {
@@ -84,16 +106,16 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 		return true;
 	}
 
+	/**
+	 * @return the average preference score of the class
+	 */
 	public synchronized float getAvgPreferenceScore() {
 		return avgPreferenceScore;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * registrationScheduler.store.StdoutDisplayInterface#writeScheduleToScreen(
-	 * )
+	
+	/* (non-Javadoc)
+	 * @see registrationScheduler.store.StdoutDisplayInterface#writeScheduleToScreen()
 	 */
 	@Override
 	public synchronized void writeScheduleToScreen() {
@@ -104,12 +126,9 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 		System.out.println("The average preference score is " + this.getAvgPreferenceScore());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * registrationScheduler.store.FileDisplayInterface#writeSchedulesToFile(
-	 * java.lang.String)
+	
+	/* (non-Javadoc)
+	 * @see registrationScheduler.store.FileDisplayInterface#writeSchedulesToFile(java.lang.String)
 	 */
 	@Override
 	public synchronized void writeSchedulesToFile(String filename_in) {
@@ -133,9 +152,7 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

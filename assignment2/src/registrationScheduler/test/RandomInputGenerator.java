@@ -11,6 +11,9 @@ public class RandomInputGenerator {
 	private static int totalStudents = 80;
 	private static ArrayList<Integer> preferences = new ArrayList<>();
 
+	/**
+	 * @param args the filename to which to write the random input test-case
+	 */
 	public static void main(String[] args) {
 		BufferedWriter bufferedWriter = null;
 		if (args.length != 1) {

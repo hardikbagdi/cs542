@@ -2,9 +2,6 @@ package registrationScheduler.threadMgmt;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import javax.xml.stream.events.StartDocument;
-
 import registrationScheduler.data.Course;
 import registrationScheduler.data.Student;
 import registrationScheduler.pool.CoursePool;
@@ -61,7 +58,7 @@ public class WorkerThread implements Runnable {
 				student = inputParser(line);
 				allocate(student);
 				if (student.hasAllCourses()) {
-					this.writeToResults(student);
+					results.putStudent(student);
 				} else {
 					pendingStudents.add(student);
 				}
@@ -82,13 +79,13 @@ public class WorkerThread implements Runnable {
 		// allocate this unlucky student any courses that are available
 		for (Course course : Course.values()) {
 			if (!studentInNeed.hasAllCourses() && !studentInNeed.hasCourse(course)) {
-				if (coursePool.getCourse(course)) {
+				if (coursePool.borrowCourse(course)) {
 					studentInNeed.addCourse(course);
 				}
 			}
 		}
 		if (studentInNeed.hasAllCourses()) {
-			writeToResults(studentInNeed);
+			results.putStudent(studentInNeed);
 			return;
 		}
 		// now we will attempt to shuffle courses between students
@@ -120,22 +117,18 @@ public class WorkerThread implements Runnable {
 				}
 			}
 			// put helper student back in the results no matter what
-			writeToResults(studentHelper);
+			results.putStudent(studentHelper);
 		}
-		writeToResults(studentInNeed);
+		results.putStudent(studentInNeed);
 	}
 
 	private Course searchCourseForStudent(Student studentHelper) {
 		for (Course course : Course.values()) {
-			if (!studentHelper.hasCourse(course) && coursePool.getCourse(course)) {
+			if (!studentHelper.hasCourse(course) && coursePool.borrowCourse(course)) {
 				return course;
 			}
 		}
 		return null;
-	}
-
-	private void writeToResults(Student student) {
-		results.putStudent(student);
 	}
 
 	private void allocate(Student student) {
@@ -145,7 +138,7 @@ public class WorkerThread implements Runnable {
 			for (int i = 0; i < Student.requriedCourses; i++) {
 				// if the course is available,then give it to him
 				course = student.getCourseByPreferenceRank(i + 1);
-				if (coursePool.getCourse(course)) {
+				if (coursePool.borrowCourse(course)) {
 					student.addCourse(course);
 				}
 			}
@@ -159,8 +152,8 @@ public class WorkerThread implements Runnable {
 	}
 
 	/**
-	 * @param line
-	 * @return
+	 * @param line denoted the student name and preference for various courses
+	 * @return the student object that was constructed by the parameter mentioned above
 	 */
 	private Student inputParser(String line) {
 		Student student = null;

@@ -59,13 +59,14 @@ public class Driver {
 
 			// print as needed
 			// only avg score
-			// System.out.println("The average preference score is "
-			// +results.getAvgPreferenceScore());
+			 System.out.println("The average preference score is "
+			 +results.getAvgPreferenceScore());
 			// entire output to stdout
-			// results.writeScheduleToScreen();
+			//   results.writeScheduleToScreen();
 			// entire output to file
-			results.writeSchedulesToFile(args[1]);
-			coursePool.toString();
+			//results.writeSchedulesToFile(args[1]);
+			//print remaining courses
+			//coursePool.toString();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -74,7 +75,6 @@ public class Driver {
 
 	/**
 	 * Called when parameter validation failed
-	 * 
 	 * @return none
 	 */
 	private static void terminate() {
@@ -84,7 +84,6 @@ public class Driver {
 
 	/**
 	 * Validates the inputs taken from the commandline
-	 * 
 	 * @param args
 	 *            commandline argument list
 	 * @return none

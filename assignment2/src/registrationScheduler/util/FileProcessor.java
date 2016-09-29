@@ -17,7 +17,7 @@ public class FileProcessor {
 	BufferedReader bufferedReader;
 
 	/**
-	 * @return the filename
+	 * @return the filename of the file which is being processed
 	 */
 	public String getFilename() {
 		return filename;
@@ -43,7 +43,7 @@ public class FileProcessor {
 	}
 
 	/**
-	 * @return
+	 * @return String which was read by the processor, this will be null when EOF is reached
 	 */
 	public synchronized String getLine() {
 		String line = null;

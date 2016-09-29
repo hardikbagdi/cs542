@@ -8,8 +8,7 @@ public interface FileDisplayInterface {
 	/**
 	 * Write the generated schedule to an output file
 	 * 
-	 * @param filename
-	 *            Outputfile
+	 * @param filename file to which to write the output
 	 */
 	public void writeSchedulesToFile(String filename);
 }

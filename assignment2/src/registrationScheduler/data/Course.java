@@ -9,6 +9,9 @@ public enum Course {
 		this.value = value;
 	}
 
+	/**
+	 * @return the int value of the enum
+	 */
 	public int getValue() {
 		return value;
 	}

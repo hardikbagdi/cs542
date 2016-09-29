@@ -17,6 +17,10 @@ public class CoursePool {
 	// having an array of object is unnecessary
 	private int[] seatCounters;
 
+	/**
+	 * @param totalCourses_in
+	 * @param seatsPerCourse_in
+	 */
 	public CoursePool(int totalCourses_in, int seatsPerCourse_in) {
 		Logger.writeMessage("CoursePool Constructor called", DebugLevel.CONSTRUCTOR);
 
@@ -31,7 +35,11 @@ public class CoursePool {
 		}
 	}
 
-	public synchronized boolean getCourse(Course course) {
+	/**
+	 * @param course
+	 * @return true if the course was borrowed successfully
+	 */
+	public synchronized boolean borrowCourse(Course course) {
 		if (course == null)
 			return false;
 		if (seatCounters[course.getValue()] > 0) {
@@ -42,6 +50,10 @@ public class CoursePool {
 		}
 	}
 
+	/**
+	 * @param course
+	 * @return the course was successfully added to the course or not
+	 */
 	public synchronized boolean returnCourse(Course course) {
 		if (course == null)
 			return false;
@@ -53,6 +65,10 @@ public class CoursePool {
 		}
 	}
 
+	/**
+	 * @param course
+	 * @return true if the course is available right now, else false
+	 */
 	public synchronized boolean isCourseAvailable(Course course) {
 		if (course == null)
 			return false;

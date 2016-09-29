@@ -43,21 +43,21 @@ public class Student {
 	}
 
 	/**
-	 * @return
+	 * @return the name of the student
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * @return
+	 * @return the preference of the student for each subject in an array
 	 */
 	public int[] getPreferences() {
 		return preferences;
 	}
 
 	/**
-	 * @return
+	 * @return Array of courses the student received after allocation.
 	 */
 	public Course[] getCoursesAlloted() {
 		// http://stackoverflow.com/questions/5690351/java-stringlist-toarray-gives-classcastexception
@@ -65,15 +65,15 @@ public class Student {
 	}
 
 	/**
-	 * @return
+	 * @return preference score of the student 
 	 */
 	public int getPreferenceScore() {
 		return preferenceScore;
 	}
 
 	/**
-	 * @param course_in
-	 * @return
+	 * @param course_in A course being offered
+	 * @return if the student has been able to secure a seat for this course or not
 	 */
 	public boolean hasCourse(Course course_in) {
 		if (course_in == null)
@@ -81,6 +81,10 @@ public class Student {
 		return this.coursesAlloted.contains(course_in);
 	}
 
+	/**
+	 * @param course
+	 * @return student gets this course 
+	 */
 	public boolean addCourse(Course course) {
 		if (course == null)
 			throw new IllegalArgumentException();
@@ -89,6 +93,10 @@ public class Student {
 		return this.coursesAlloted.add(course);
 	}
 
+	/**
+	 * @param course
+	 * @return student is removed from this course
+	 */
 	public boolean removeCourse(Course course) {
 		if (course == null)
 			return true;
@@ -98,7 +106,7 @@ public class Student {
 	}
 
 	/**
-	 * @return
+	 * @return true if student has all the courses needed i.e. the requiredCOurses criteria has been fulfilled
 	 */
 	public boolean hasAllCourses() {
 		return (coursesAlloted.size() == Student.requriedCourses);
@@ -106,7 +114,6 @@ public class Student {
 
 	/**
 	 * @throws IllegalAccessException
-	 * 
 	 */
 	public void calculatePreferenceScore() throws IllegalAccessException {
 		int sumOfPreference = 0;
@@ -122,7 +129,7 @@ public class Student {
 
 	/**
 	 * @param course
-	 * @return
+	 * @return student's preference for the course
 	 */
 	public int coursePreference(Course course) {
 		return preferences[course.getValue()];
@@ -130,7 +137,7 @@ public class Student {
 
 	/**
 	 * @param preferenceRank
-	 * @return
+	 * @return returns the course for the corresponding preference value
 	 */
 	public Course getCourseByPreferenceRank(int preferenceRank) {
 		int i;
@@ -145,6 +152,9 @@ public class Student {
 		return Course.values()[i];
 	}
 
+	/**
+	 * @return the string which shows student name and the courses he/she received.
+	 */
 	public String getOutputString() {
 		StringBuilder outString = new StringBuilder(this.name + " ");
 		for (Course course : coursesAlloted) {
@@ -154,12 +164,11 @@ public class Student {
 		return outString.toString();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+
+	// http://stackoverflow.com/questions/19220691/how-can-i-correctly-remove-an-object-from-arraylist
+	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	// http://stackoverflow.com/questions/19220691/how-can-i-correctly-remove-an-object-from-arraylist
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null)
