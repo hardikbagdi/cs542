@@ -8,6 +8,7 @@ import registrationScheduler.store.Results;
 import registrationScheduler.threadMgmt.CreateWorkers;
 import registrationScheduler.util.FileProcessor;
 import registrationScheduler.util.Logger;
+import registrationScheduler.util.Logger.DebugLevel;
 
 /**
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
@@ -57,16 +58,19 @@ public class Driver {
 			// calculate average preference score
 			results.calculateAvgPreferenceScore();
 
+			Logger.writeMessage(results.toString(), DebugLevel.DS_STORE);
 			// print as needed
 			// only avg score
-			 System.out.println("The average preference score is "
-			 +results.getAvgPreferenceScore());
+			System.out.println("The average preference score is " + results.getAvgPreferenceScore());
+
 			// entire output to stdout
-			//   results.writeScheduleToScreen();
+			// results.writeScheduleToScreen();
+
 			// entire output to file
-			//results.writeSchedulesToFile(args[1]);
-			//print remaining courses
-			//coursePool.toString();
+			// results.writeSchedulesToFile(args[1]);
+
+			// print remaining courses
+			// coursePool.toString();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -75,6 +79,7 @@ public class Driver {
 
 	/**
 	 * Called when parameter validation failed
+	 * 
 	 * @return none
 	 */
 	private static void terminate() {
@@ -84,12 +89,14 @@ public class Driver {
 
 	/**
 	 * Validates the inputs taken from the commandline
+	 * 
 	 * @param args
 	 *            commandline argument list
 	 * @return none
 	 */
 	private static void validate_inputs(String[] args) {
 		File file;
+		int a = 0;
 		try {
 			if (args.length != 4) {
 				terminate();
@@ -104,8 +111,16 @@ public class Driver {
 			file = new File(args[1]);
 			if (file.exists())
 				file.delete();
-			Integer.parseInt(args[2]);
-			Integer.parseInt(args[3]);
+			a = Integer.parseInt(args[2]);
+			if (a > 3 || a < 1) {
+				System.out.println("Please provide thread count between 1 and 3");
+				terminate();
+			}
+			a = Integer.parseInt(args[3]);
+			if (a > 4 || a < 0) {
+				System.out.println("Please provide debug value between 0 and 4");
+				terminate();
+			}
 		} catch (NumberFormatException e) {
 			System.out.println("Please provide thread count/debug value as an integer");
 			terminate();

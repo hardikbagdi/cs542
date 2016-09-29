@@ -12,7 +12,8 @@ public class RandomInputGenerator {
 	private static ArrayList<Integer> preferences = new ArrayList<>();
 
 	/**
-	 * @param args the filename to which to write the random input test-case
+	 * @param args
+	 *            the filename to which to write the random input test-case
 	 */
 	public static void main(String[] args) {
 		BufferedWriter bufferedWriter = null;

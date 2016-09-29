@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.swing.internal.plaf.basic.resources.basic;
+
 import registrationScheduler.data.Student;
 import registrationScheduler.util.Logger;
 import registrationScheduler.util.Logger.DebugLevel;
@@ -33,7 +35,7 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 			throw new IllegalArgumentException("Cannot add null.");
 		if (students.contains(student))
 			throw new IllegalArgumentException("Student already present in results");
-		Logger.writeMessage("Adding Student to results" + student, DebugLevel.DS_STORE);
+		Logger.writeMessage("Adding Student to results" + student, DebugLevel.RESULTS_ENTRY);
 		students.add(student);
 	}
 
@@ -44,7 +46,7 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 	public synchronized void deleteStudent(Student student) {
 		if (student == null)
 			throw new IllegalArgumentException("Cannot remove null.");
-		Logger.writeMessage("Deleteing Student from results" + student, DebugLevel.DS_STORE);
+		Logger.writeMessage("Deleteing Student from results" + student, DebugLevel.RESULTS_ENTRY);
 		students.remove(student);
 	}
 
@@ -68,7 +70,7 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 
 	/**
 	 * @param student
-	 * @return true if the result set contains the student 
+	 * @return true if the result set contains the student
 	 */
 	public synchronized boolean contains(Student student) {
 		if (student == null)
@@ -113,9 +115,12 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 		return avgPreferenceScore;
 	}
 
-	
-	/* (non-Javadoc)
-	 * @see registrationScheduler.store.StdoutDisplayInterface#writeScheduleToScreen()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * registrationScheduler.store.StdoutDisplayInterface#writeScheduleToScreen(
+	 * )
 	 */
 	@Override
 	public synchronized void writeScheduleToScreen() {
@@ -126,9 +131,12 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 		System.out.println("The average preference score is " + this.getAvgPreferenceScore());
 	}
 
-	
-	/* (non-Javadoc)
-	 * @see registrationScheduler.store.FileDisplayInterface#writeSchedulesToFile(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * registrationScheduler.store.FileDisplayInterface#writeSchedulesToFile(
+	 * java.lang.String)
 	 */
 	@Override
 	public synchronized void writeSchedulesToFile(String filename_in) {
@@ -152,14 +160,19 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
+		StringBuilder sb = new StringBuilder();
 		for (Student student : students) {
-			Logger.writeMessage(student.getOutputString(), DebugLevel.RESULTS_ENTRY);
+			sb.append(student.getOutputString());
+			sb.append("\n");
 		}
-		return "No of students in the result set:" + students.size();
+		sb.append("\nNo of students in the result set:" + students.size() + "\n");
+		return sb.toString();
 	}
 }

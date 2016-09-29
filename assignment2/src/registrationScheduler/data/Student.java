@@ -65,15 +65,17 @@ public class Student {
 	}
 
 	/**
-	 * @return preference score of the student 
+	 * @return preference score of the student
 	 */
 	public int getPreferenceScore() {
 		return preferenceScore;
 	}
 
 	/**
-	 * @param course_in A course being offered
-	 * @return if the student has been able to secure a seat for this course or not
+	 * @param course_in
+	 *            A course being offered
+	 * @return if the student has been able to secure a seat for this course or
+	 *         not
 	 */
 	public boolean hasCourse(Course course_in) {
 		if (course_in == null)
@@ -83,7 +85,7 @@ public class Student {
 
 	/**
 	 * @param course
-	 * @return student gets this course 
+	 * @return student gets this course
 	 */
 	public boolean addCourse(Course course) {
 		if (course == null)
@@ -106,7 +108,8 @@ public class Student {
 	}
 
 	/**
-	 * @return true if student has all the courses needed i.e. the requiredCOurses criteria has been fulfilled
+	 * @return true if student has all the courses needed i.e. the
+	 *         requiredCOurses criteria has been fulfilled
 	 */
 	public boolean hasAllCourses() {
 		return (coursesAlloted.size() == Student.requriedCourses);
@@ -153,7 +156,8 @@ public class Student {
 	}
 
 	/**
-	 * @return the string which shows student name and the courses he/she received.
+	 * @return the string which shows student name and the courses he/she
+	 *         received.
 	 */
 	public String getOutputString() {
 		StringBuilder outString = new StringBuilder(this.name + " ");
@@ -164,9 +168,10 @@ public class Student {
 		return outString.toString();
 	}
 
-
 	// http://stackoverflow.com/questions/19220691/how-can-i-correctly-remove-an-object-from-arraylist
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

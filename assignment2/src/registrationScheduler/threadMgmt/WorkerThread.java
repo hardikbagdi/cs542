@@ -152,8 +152,10 @@ public class WorkerThread implements Runnable {
 	}
 
 	/**
-	 * @param line denoted the student name and preference for various courses
-	 * @return the student object that was constructed by the parameter mentioned above
+	 * @param line
+	 *            denoted the student name and preference for various courses
+	 * @return the student object that was constructed by the parameter
+	 *         mentioned above
 	 */
 	private Student inputParser(String line) {
 		Student student = null;

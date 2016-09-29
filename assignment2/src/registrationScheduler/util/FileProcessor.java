@@ -43,7 +43,8 @@ public class FileProcessor {
 	}
 
 	/**
-	 * @return String which was read by the processor, this will be null when EOF is reached
+	 * @return String which was read by the processor, this will be null when
+	 *         EOF is reached
 	 */
 	public synchronized String getLine() {
 		String line = null;
