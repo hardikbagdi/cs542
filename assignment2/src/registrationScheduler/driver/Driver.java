@@ -4,6 +4,7 @@ import java.io.File;
 
 import registrationScheduler.data.Course;
 import registrationScheduler.pool.CoursePool;
+import registrationScheduler.pool.ObjectPoolInterface;
 import registrationScheduler.store.FileDisplayInterface;
 import registrationScheduler.store.Results;
 import registrationScheduler.store.StdoutDisplayInterface;
@@ -33,7 +34,7 @@ public class Driver {
 		CreateWorkers createWorkers = null;
 		StoreInterface store = null;
 		FileProcessor fileProcessor = null;
-		CoursePool coursePool = null;
+		ObjectPoolInterface coursePool = null;
 		try {
 			// validate the inputs
 			validate_inputs(args);
@@ -61,16 +62,16 @@ public class Driver {
 			// calculate average preference score
 			store.calculateAvgPreferenceScore();
 
-			Logger.writeMessage(store.toString(), DebugLevel.DS_STORE);
+			Logger.writeMessage((store).toString(), DebugLevel.DS_STORE);
 			// print as needed
 			// only avg score
 			System.out.println("The average preference score is " + store.getAvgPreferenceScore());
 
 			// entire output to stdout
-			((StdoutDisplayInterface) store).writeScheduleToScreen();
+			//((StdoutDisplayInterface) store).writeScheduleToScreen();
 
 			// entire output to file
-			((FileDisplayInterface) store).writeSchedulesToFile(args[1]);
+			//((FileDisplayInterface) store).writeSchedulesToFile(args[1]);
 
 			// print remaining courses
 			// coursePool.toString();

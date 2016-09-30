@@ -10,7 +10,7 @@ import registrationScheduler.util.Logger.DebugLevel;
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public class CoursePool {
+public class CoursePool implements ObjectPoolInterface {
 	private int totalCourses;
 	private int seatsPerCourse;
 	// counters for each course, all objects are same, no unique property so
@@ -35,10 +35,10 @@ public class CoursePool {
 		}
 	}
 
-	/**
-	 * @param course
-	 * @return true if the course was borrowed successfully
+	/* (non-Javadoc)
+	 * @see registrationScheduler.pool.ObjectPoolInterface#borrowCourse(registrationScheduler.data.Course)
 	 */
+	@Override
 	public synchronized boolean borrowCourse(Course course) {
 		if (course == null)
 			return false;
@@ -50,10 +50,10 @@ public class CoursePool {
 		}
 	}
 
-	/**
-	 * @param course
-	 * @return the course was successfully added to the course or not
+	/* (non-Javadoc)
+	 * @see registrationScheduler.pool.ObjectPoolInterface#returnCourse(registrationScheduler.data.Course)
 	 */
+	@Override
 	public synchronized boolean returnCourse(Course course) {
 		if (course == null)
 			return false;
@@ -65,10 +65,10 @@ public class CoursePool {
 		}
 	}
 
-	/**
-	 * @param course
-	 * @return true if the course is available right now, else false
+	/* (non-Javadoc)
+	 * @see registrationScheduler.pool.ObjectPoolInterface#isCourseAvailable(registrationScheduler.data.Course)
 	 */
+	@Override
 	public synchronized boolean isCourseAvailable(Course course) {
 		if (course == null)
 			return false;

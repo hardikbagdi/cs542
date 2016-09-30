@@ -1,6 +1,7 @@
 package registrationScheduler.threadMgmt;
 
 import registrationScheduler.pool.CoursePool;
+import registrationScheduler.pool.ObjectPoolInterface;
 import registrationScheduler.store.Results;
 import registrationScheduler.store.StoreInterface;
 import registrationScheduler.util.FileProcessor;
@@ -16,14 +17,14 @@ public class CreateWorkers {
 	private Thread[] threads;
 	private FileProcessor fileProcessor;
 	private StoreInterface store;
-	private CoursePool coursePool;
+	private ObjectPoolInterface coursePool;
 
 	/**
 	 * @param fileProcessor_in
 	 * @param store_in
 	 * @param coursePool_in
 	 */
-	public CreateWorkers(FileProcessor fileProcessor_in, StoreInterface store_in, CoursePool coursePool_in) {
+	public CreateWorkers(FileProcessor fileProcessor_in, StoreInterface store_in, ObjectPoolInterface coursePool_in) {
 		Logger.writeMessage("CreateWorkers constructor called", DebugLevel.CONSTRUCTOR);
 		if (fileProcessor_in == null || store_in == null) {
 			throw new IllegalArgumentException();

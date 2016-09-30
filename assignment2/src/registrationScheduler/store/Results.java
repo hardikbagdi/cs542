@@ -26,9 +26,11 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface, St
 		students = new ArrayList<>();
 	}
 
-	/**
-	 * @param student
-	 * @return none
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see registrationScheduler.store.StoreInterface#putStudent(
+	 * registrationScheduler.data.Student)
 	 */
 	@Override
 	public synchronized void putStudent(Student student) {
@@ -40,9 +42,11 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface, St
 		students.add(student);
 	}
 
-	/**
-	 * @param student
-	 * @return none
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see registrationScheduler.store.StoreInterface#deleteStudent(
+	 * registrationScheduler.data.Student)
 	 */
 	@Override
 	public synchronized void deleteStudent(Student student) {
@@ -52,8 +56,10 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface, St
 		students.remove(student);
 	}
 
-	/**
-	 * @return Student which was picked up randomly and deleted
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see registrationScheduler.store.StoreInterface#deleteRandomStudent()
 	 */
 	@Override
 	public synchronized Student deleteRandomStudent() {
@@ -62,9 +68,11 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface, St
 		return student;
 	}
 
-	/**
-	 * @param student
-	 * @return none
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see registrationScheduler.store.StoreInterface#updateStudent(
+	 * registrationScheduler.data.Student)
 	 */
 	@Override
 	public synchronized void updateStudent(Student student) {
@@ -72,9 +80,12 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface, St
 		putStudent(student);
 	}
 
-	/**
-	 * @param student
-	 * @return true if the result set contains the student
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * registrationScheduler.store.StoreInterface#contains(registrationScheduler
+	 * .data.Student)
 	 */
 	@Override
 	public synchronized boolean contains(Student student) {
@@ -83,16 +94,21 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface, St
 		return students.contains(student);
 	}
 
-	/**
-	 * @return A list of all students in the result set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see registrationScheduler.store.StoreInterface#getStudents()
 	 */
 	@Override
 	public synchronized List<Student> getStudents() {
 		return students;
 	}
 
-	/**
-	 * @return true if the avg preferecne score was succesfully generated
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * registrationScheduler.store.StoreInterface#calculateAvgPreferenceScore()
 	 */
 	@Override
 	public synchronized boolean calculateAvgPreferenceScore() {
@@ -115,8 +131,10 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface, St
 		return true;
 	}
 
-	/**
-	 * @return the average preference score of the class
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see registrationScheduler.store.StoreInterface#getAvgPreferenceScore()
 	 */
 	@Override
 	public synchronized float getAvgPreferenceScore() {

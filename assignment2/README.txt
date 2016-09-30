@@ -37,12 +37,13 @@ registrationScheduler/driver:
 Driver.java Main driver program
 
 registrationScheduler/pool:
+StoreInterface.java ObjectPool Inteface
 CoursePool.java ObjectPool implementation
 
 registrationScheduler/store:
-StoreInterface.java
-FileDisplayInterface.java
-StdoutDisplayInterface.java
+StoreInterface.java Interface for the Results class; enforcing put,get,delete
+FileDisplayInterface.java Interface to write to the result to display
+StdoutDisplayInterface.java Interface to write to File
 Results.java 
 
 registrationScheduler/test:
@@ -53,7 +54,7 @@ CreateWorkers.java Class which creates all the threads necessary and then waits 
 WorkerThread.java Thread which performs allocation
 
 registrationScheduler/util:
-FileProcessor.java
+FileProcessor.java synchronized file reading amongst various threads
 Logger.java Log to stdout as per the log level.
 
 SAMPLE OUTPUT:

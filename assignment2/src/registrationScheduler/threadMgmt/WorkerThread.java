@@ -5,6 +5,7 @@ import java.util.Scanner;
 import registrationScheduler.data.Course;
 import registrationScheduler.data.Student;
 import registrationScheduler.pool.CoursePool;
+import registrationScheduler.pool.ObjectPoolInterface;
 import registrationScheduler.store.Results;
 import registrationScheduler.store.StoreInterface;
 import registrationScheduler.util.FileProcessor;
@@ -18,7 +19,7 @@ import registrationScheduler.util.Logger.DebugLevel;
 public class WorkerThread implements Runnable {
 	private FileProcessor fileProcessor;
 	private StoreInterface store;
-	private CoursePool coursePool;
+	private ObjectPoolInterface coursePool;
 	private String threadName;
 	private Scanner scanner;
 	private ArrayList<Student> pendingStudents;
@@ -30,7 +31,7 @@ public class WorkerThread implements Runnable {
 	 * @param coursePool_in
 	 */
 	public WorkerThread(String threadName_in, FileProcessor fileProcessor_in, StoreInterface results_in,
-			CoursePool coursePool_in) {
+			ObjectPoolInterface coursePool_in) {
 		Logger.writeMessage("WorkerThread constructor called", DebugLevel.CONSTRUCTOR);
 		if (fileProcessor_in == null || results_in == null || coursePool_in == null) {
 			throw new IllegalArgumentException();
