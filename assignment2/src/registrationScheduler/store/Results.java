@@ -5,9 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.sun.swing.internal.plaf.basic.resources.basic;
-
 import registrationScheduler.data.Student;
 import registrationScheduler.util.Logger;
 import registrationScheduler.util.Logger.DebugLevel;
