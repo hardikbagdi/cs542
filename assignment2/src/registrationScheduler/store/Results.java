@@ -16,7 +16,7 @@ import registrationScheduler.util.Logger.DebugLevel;
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public class Results implements StdoutDisplayInterface, FileDisplayInterface {
+public class Results implements StdoutDisplayInterface, FileDisplayInterface, StoreInterface {
 	// appropriate data structure as private data member
 	private ArrayList<Student> students;
 	private float avgPreferenceScore;
@@ -30,6 +30,7 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 	 * @param student
 	 * @return none
 	 */
+	@Override
 	public synchronized void putStudent(Student student) {
 		if (student == null)
 			throw new IllegalArgumentException("Cannot add null.");
@@ -43,6 +44,7 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 	 * @param student
 	 * @return none
 	 */
+	@Override
 	public synchronized void deleteStudent(Student student) {
 		if (student == null)
 			throw new IllegalArgumentException("Cannot remove null.");
@@ -53,6 +55,7 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 	/**
 	 * @return Student which was picked up randomly and deleted
 	 */
+	@Override
 	public synchronized Student deleteRandomStudent() {
 		Student student = students.get((int) Math.random() * students.size());
 		students.remove(student);
@@ -63,6 +66,7 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 	 * @param student
 	 * @return none
 	 */
+	@Override
 	public synchronized void updateStudent(Student student) {
 		deleteStudent(student);
 		putStudent(student);
@@ -72,6 +76,7 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 	 * @param student
 	 * @return true if the result set contains the student
 	 */
+	@Override
 	public synchronized boolean contains(Student student) {
 		if (student == null)
 			return false;
@@ -81,6 +86,7 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 	/**
 	 * @return A list of all students in the result set
 	 */
+	@Override
 	public synchronized List<Student> getStudents() {
 		return students;
 	}
@@ -88,6 +94,7 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 	/**
 	 * @return true if the avg preferecne score was succesfully generated
 	 */
+	@Override
 	public synchronized boolean calculateAvgPreferenceScore() {
 		float sum = 0;
 		try {
@@ -111,6 +118,7 @@ public class Results implements StdoutDisplayInterface, FileDisplayInterface {
 	/**
 	 * @return the average preference score of the class
 	 */
+	@Override
 	public synchronized float getAvgPreferenceScore() {
 		return avgPreferenceScore;
 	}

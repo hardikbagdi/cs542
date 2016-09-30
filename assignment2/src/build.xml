@@ -43,10 +43,10 @@
 
 	<target name="run" depends="jar">
 		<java jar="${BUILD}/jar/registrationScheduler.jar" fork="true">
-			<arg value="data.txt" />
+			<arg value="input.txt" />
 			<arg value="output.txt" />
 			<arg value="3" />
-			<arg value="4" />
+			<arg value="0" />
 		</java>
 
 	</target>

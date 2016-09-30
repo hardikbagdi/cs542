@@ -6,6 +6,7 @@ import registrationScheduler.data.Course;
 import registrationScheduler.data.Student;
 import registrationScheduler.pool.CoursePool;
 import registrationScheduler.store.Results;
+import registrationScheduler.store.StoreInterface;
 import registrationScheduler.util.FileProcessor;
 import registrationScheduler.util.Logger;
 import registrationScheduler.util.Logger.DebugLevel;
@@ -16,7 +17,7 @@ import registrationScheduler.util.Logger.DebugLevel;
  */
 public class WorkerThread implements Runnable {
 	private FileProcessor fileProcessor;
-	private Results results;
+	private StoreInterface store;
 	private CoursePool coursePool;
 	private String threadName;
 	private Scanner scanner;
@@ -28,7 +29,7 @@ public class WorkerThread implements Runnable {
 	 * @param results_in
 	 * @param coursePool_in
 	 */
-	public WorkerThread(String threadName_in, FileProcessor fileProcessor_in, Results results_in,
+	public WorkerThread(String threadName_in, FileProcessor fileProcessor_in, StoreInterface results_in,
 			CoursePool coursePool_in) {
 		Logger.writeMessage("WorkerThread constructor called", DebugLevel.CONSTRUCTOR);
 		if (fileProcessor_in == null || results_in == null || coursePool_in == null) {
@@ -37,7 +38,7 @@ public class WorkerThread implements Runnable {
 		threadName = threadName_in;
 		fileProcessor = fileProcessor_in;
 		coursePool = coursePool_in;
-		results = results_in;
+		store = results_in;
 		pendingStudents = new ArrayList<>();
 		return;
 	}
@@ -58,7 +59,7 @@ public class WorkerThread implements Runnable {
 				student = inputParser(line);
 				allocate(student);
 				if (student.hasAllCourses()) {
-					results.putStudent(student);
+					store.putStudent(student);
 				} else {
 					pendingStudents.add(student);
 				}
@@ -85,13 +86,13 @@ public class WorkerThread implements Runnable {
 			}
 		}
 		if (studentInNeed.hasAllCourses()) {
-			results.putStudent(studentInNeed);
+			store.putStudent(studentInNeed);
 			return;
 		}
 		// now we will attempt to shuffle courses between students
 		while (!studentInNeed.hasAllCourses()) {
 			// take up a random student who might help our unlucky student
-			Student studentHelper = results.deleteRandomStudent();
+			Student studentHelper = store.deleteRandomStudent();
 			// get his courses
 			Course[] courses = studentHelper.getCoursesAlloted();
 			for (Course course : courses) {
@@ -117,9 +118,9 @@ public class WorkerThread implements Runnable {
 				}
 			}
 			// put helper student back in the results no matter what
-			results.putStudent(studentHelper);
+			store.putStudent(studentHelper);
 		}
-		results.putStudent(studentInNeed);
+		store.putStudent(studentInNeed);
 	}
 
 	private Course searchCourseForStudent(Student studentHelper) {

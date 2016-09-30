@@ -4,7 +4,10 @@ import java.io.File;
 
 import registrationScheduler.data.Course;
 import registrationScheduler.pool.CoursePool;
+import registrationScheduler.store.FileDisplayInterface;
 import registrationScheduler.store.Results;
+import registrationScheduler.store.StdoutDisplayInterface;
+import registrationScheduler.store.StoreInterface;
 import registrationScheduler.threadMgmt.CreateWorkers;
 import registrationScheduler.util.FileProcessor;
 import registrationScheduler.util.Logger;
@@ -28,7 +31,7 @@ public class Driver {
 	public static void main(String args[]) {
 		int threadCount = -1;
 		CreateWorkers createWorkers = null;
-		Results results = null;
+		StoreInterface store = null;
 		FileProcessor fileProcessor = null;
 		CoursePool coursePool = null;
 		try {
@@ -43,31 +46,31 @@ public class Driver {
 			fileProcessor = new FileProcessor(args[0]);
 
 			// setup results
-			results = new Results();
+			store = new Results();
 
 			// setup object pool
 			coursePool = new CoursePool(Course.totalCourses, capacityPerCourse);
 
 			// setup CreateWorkers
-			createWorkers = new CreateWorkers(fileProcessor, results, coursePool);
+			createWorkers = new CreateWorkers(fileProcessor, store, coursePool);
 
 			// start processing
 			createWorkers.startWorker(threadCount);
 			// done processing
 
 			// calculate average preference score
-			results.calculateAvgPreferenceScore();
+			store.calculateAvgPreferenceScore();
 
-			Logger.writeMessage(results.toString(), DebugLevel.DS_STORE);
+			Logger.writeMessage(store.toString(), DebugLevel.DS_STORE);
 			// print as needed
 			// only avg score
-			System.out.println("The average preference score is " + results.getAvgPreferenceScore());
+			System.out.println("The average preference score is " + store.getAvgPreferenceScore());
 
 			// entire output to stdout
-			// results.writeScheduleToScreen();
+			((StdoutDisplayInterface) store).writeScheduleToScreen();
 
 			// entire output to file
-			// results.writeSchedulesToFile(args[1]);
+			((FileDisplayInterface) store).writeSchedulesToFile(args[1]);
 
 			// print remaining courses
 			// coursePool.toString();

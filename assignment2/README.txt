@@ -40,6 +40,7 @@ registrationScheduler/pool:
 CoursePool.java ObjectPool implementation
 
 registrationScheduler/store:
+StoreInterface.java
 FileDisplayInterface.java
 StdoutDisplayInterface.java
 Results.java 
