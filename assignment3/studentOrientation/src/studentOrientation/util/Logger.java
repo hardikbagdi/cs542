@@ -12,7 +12,7 @@ public class Logger {
 	private static DebugLevel debugLevel;
 
 	/**
-	 * Sets the logger level based on an int
+	 * Sets the logger level based on an integer
 	 * 
 	 * @return none
 	 */
@@ -47,6 +47,8 @@ public class Logger {
 	 * @return none
 	 */
 	public static void setDebugValue(DebugLevel levelIn) {
+		if(levelIn == null)
+			return;
 		debugLevel = levelIn;
 		return;
 	}
@@ -57,6 +59,8 @@ public class Logger {
 	 * @return none
 	 */
 	public static void writeMessage(String message, DebugLevel levelIn) {
+		if (levelIn == null || message == null)
+			return;
 		if (levelIn == debugLevel)
 			System.out.println("Logger->" + message);
 	}
