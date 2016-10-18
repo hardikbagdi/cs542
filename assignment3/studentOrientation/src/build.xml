@@ -43,17 +43,13 @@
 
 	<target name="run" depends="jar">
 		<java jar="${BUILD}/jar/studentOrientation.jar" fork="true">
-			<arg value="input.txt" />
-			<arg value="output.txt" />
-			<arg value="3" />
-			<arg value="0" />
 		</java>
 
 	</target>
 
 	<target name="tarzip">
 		<delete file="./firstName_lastName_assign2.tar" quiet="true" />
-		<tar destfile="${BUILD}/dist/hardik_bagdi_assign2.tar.gz" basedir="../../" compression="gzip" />
+		<tar destfile="${BUILD}/dist/hardik_bagdi_assign3.tar.gz" basedir="../../" compression="gzip" />
 	</target>
 
 </project>

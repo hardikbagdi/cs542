@@ -25,18 +25,18 @@ public class Logger {
 		case 0:
 			debugLevel = DebugLevel.NO_OUTPUT;
 			break;
-//		case 1:
-//			debugLevel = DebugLevel.;
-//			break;
-//		case 2:
-//			debugLevel = DebugLevel.;
-//			break;
-//		case 3:
-//			debugLevel = DebugLevel.;
-//			break;
-//		case 4:
-//			debugLevel = DebugLevel.;
-//			break;
+		// case 1:
+		// debugLevel = DebugLevel.;
+		// break;
+		// case 2:
+		// debugLevel = DebugLevel.;
+		// break;
+		// case 3:
+		// debugLevel = DebugLevel.;
+		// break;
+		// case 4:
+		// debugLevel = DebugLevel.;
+		// break;
 		}
 		return;
 	}
@@ -47,7 +47,7 @@ public class Logger {
 	 * @return none
 	 */
 	public static void setDebugValue(DebugLevel levelIn) {
-		if(levelIn == null)
+		if (levelIn == null)
 			return;
 		debugLevel = levelIn;
 		return;
