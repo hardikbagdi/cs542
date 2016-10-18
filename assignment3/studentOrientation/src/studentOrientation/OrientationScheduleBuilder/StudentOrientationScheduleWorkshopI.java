@@ -8,7 +8,8 @@ import studentOrientation.student.StudentScheduleI;
  */
 public interface StudentOrientationScheduleWorkshopI {
 	/**
-	 * @param studentScheduleI Student for which to construct the entire schedule
+	 * @param studentScheduleI
+	 *            Student for which to construct the entire schedule
 	 */
 	public void constructSchedule(StudentScheduleI studentScheduleI);
 }

@@ -8,8 +8,12 @@ import studentOrientation.student.StudentScheduleI;
  */
 public class StudentOrientationScheduleWorkshop implements StudentOrientationScheduleWorkshopI {
 
-	/* (non-Javadoc)
-	 * @see studentOrientation.OrientationScheduleBuilder.StudentOrientationScheduleWorkshopI#constructSchedule(studentOrientation.student.StudentScheduleI)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see studentOrientation.OrientationScheduleBuilder.
+	 * StudentOrientationScheduleWorkshopI#constructSchedule(studentOrientation.
+	 * student.StudentScheduleI)
 	 */
 	@Override
 	public void constructSchedule(StudentScheduleI studentSchedule) {

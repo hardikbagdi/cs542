@@ -83,7 +83,7 @@ public class StudentSchedule implements StudentScheduleI {
 	@Override
 	public void printItinerary(PrintWriter printWriter) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

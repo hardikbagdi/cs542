@@ -30,13 +30,13 @@ public class Driver {
 		String name = "Larry David";
 		Long id = 42L;
 		// Comments list the choices available
-		
+
 		// BUS_TOUR,WALKING_TOUR;
 		CampusTourChoice campusTourChoice = CampusTourChoice.BUS_TOUR;
-		
+
 		// MANDO_BOOK_STORE, UNIVERSITY_BOOK_STORE;
 		BookStoreChoice bookStoreChoice = BookStoreChoice.MANDO_BOOK_STORE;
-		
+
 		// OFFLINE_QUEUE, ONLINE_GAMING_CONTEST;
 		DormitoryRegistrationChoice dormitoryRegistrationChoice = DormitoryRegistrationChoice.OFFLINE_QUEUE;
 
@@ -45,7 +45,7 @@ public class Driver {
 
 		StudentScheduleI studentSchedule = new StudentSchedule(name, id, campusTourChoice, bookStoreChoice,
 				dormitoryRegistrationChoice, courseRegistrationChoice);
-		
+
 		StudentOrientationScheduleWorkshopI scheduleWorkshop = new StudentOrientationScheduleWorkshop();
 
 		scheduleWorkshop.constructSchedule(studentSchedule);

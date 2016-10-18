@@ -6,9 +6,9 @@ public interface StudentScheduleI {
 	public String getName();
 
 	public Long getIdNumber();
-	
+
 	public void printItinerary(PrintWriter printWriter);
-	
+
 	public void buildCampusTourItinerary();
 
 	public void buildBookStoreItenerary();
