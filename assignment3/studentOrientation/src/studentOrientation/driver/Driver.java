@@ -1,9 +1,13 @@
 package studentOrientation.driver;
 
+import studentOrientation.OrientationScheduleBuilder.StudentOrientationScheduleWorkshop;
+import studentOrientation.OrientationScheduleBuilder.StudentOrientationScheduleWorkshopI;
 import studentOrientation.bookStore.BookStoreChoice;
 import studentOrientation.campusTour.CampusTourChoice;
 import studentOrientation.courseRegistration.CourseRegistrationChoice;
 import studentOrientation.dormitory.DormitoryRegistrationChoice;
+import studentOrientation.student.StudentSchedule;
+import studentOrientation.student.StudentScheduleI;
 import studentOrientation.util.Logger;
 import studentOrientation.util.Logger.DebugLevel;
 
@@ -12,7 +16,7 @@ import studentOrientation.util.Logger.DebugLevel;
  *
  */
 public class Driver {
-	public static final DebugLevel debuglevel = DebugLevel.NO_OUTPUT;
+	private static final DebugLevel debuglevel = DebugLevel.NO_OUTPUT;
 
 	/**
 	 * @param args
@@ -21,15 +25,29 @@ public class Driver {
 	public static void main(String[] args) {
 		// set Logger Debug value
 		Logger.setDebugValue(debuglevel);
+
+		// Student details and choices
 		String name = "Larry David";
-		int id = 42;
+		Long id = 42L;
+		// Comments list the choices available
+		
+		// BUS_TOUR,WALKING_TOUR;
 		CampusTourChoice campusTourChoice = CampusTourChoice.BUS_TOUR;
+		
+		// MANDO_BOOK_STORE, UNIVERSITY_BOOK_STORE;
 		BookStoreChoice bookStoreChoice = BookStoreChoice.MANDO_BOOK_STORE;
+		
+		// OFFLINE_QUEUE, ONLINE_GAMING_CONTEST;
 		DormitoryRegistrationChoice dormitoryRegistrationChoice = DormitoryRegistrationChoice.OFFLINE_QUEUE;
+
+		// REGISTRAR_OFFICE,FROM_EB_LABS;
 		CourseRegistrationChoice courseRegistrationChoice = CourseRegistrationChoice.FROM_EB_LABS;
 
-		System.out.println("HELLO WORLD");
+		StudentScheduleI studentSchedule = new StudentSchedule(name, id, campusTourChoice, bookStoreChoice,
+				dormitoryRegistrationChoice, courseRegistrationChoice);
+		
+		StudentOrientationScheduleWorkshopI scheduleWorkshop = new StudentOrientationScheduleWorkshop();
 
-		System.out.println("BYE WORLD");
+		scheduleWorkshop.constructSchedule(studentSchedule);
 	}
 }

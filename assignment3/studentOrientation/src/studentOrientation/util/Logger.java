@@ -6,40 +6,10 @@ package studentOrientation.util;
  */
 public class Logger {
 	public static enum DebugLevel {
-		NO_OUTPUT
+		NO_OUTPUT, CONSTRUCTOR
 	};
 
 	private static DebugLevel debugLevel;
-
-	/**
-	 * Sets the logger level based on an integer
-	 * 
-	 * @return none
-	 */
-	public static void setDebugValue(int levelIn) {
-		// basic validation
-		if (levelIn < 0 || levelIn > 4) {
-			throw new IllegalArgumentException("Logger debug level should not be between 0-5.");
-		}
-		switch (levelIn) {
-		case 0:
-			debugLevel = DebugLevel.NO_OUTPUT;
-			break;
-		// case 1:
-		// debugLevel = DebugLevel.;
-		// break;
-		// case 2:
-		// debugLevel = DebugLevel.;
-		// break;
-		// case 3:
-		// debugLevel = DebugLevel.;
-		// break;
-		// case 4:
-		// debugLevel = DebugLevel.;
-		// break;
-		}
-		return;
-	}
 
 	/**
 	 * Sets up the logger level- based on DebugLevel
