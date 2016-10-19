@@ -1,0 +1,10 @@
+package studentOrientation.courseRegistration;
+
+import studentOrientation.activityExpenses.CaloriesI;
+import studentOrientation.activityExpenses.CarbonCostI;
+import studentOrientation.activityExpenses.CurrencyCostI;
+import studentOrientation.activityExpenses.DurationI;
+
+public class ElectronicCourseRegistration implements CourseRegistrationI,CaloriesI,CarbonCostI,CurrencyCostI,DurationI{
+
+}

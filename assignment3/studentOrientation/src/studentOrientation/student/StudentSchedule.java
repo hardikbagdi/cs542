@@ -17,7 +17,9 @@ public class StudentSchedule implements StudentScheduleI {
 	BookStoreChoice bookStoreChoice;
 	DormitoryRegistrationChoice dormitoryRegistrationChoice;
 	CourseRegistrationChoice courseRegistrationChoice;
-
+	
+	
+	
 	public StudentSchedule(String name_in, Long ID_in, CampusTourChoice campusTourChoice_in,
 			BookStoreChoice bookStoreChoice_in, DormitoryRegistrationChoice dormitoryRegistrationChoice_in,
 			CourseRegistrationChoice courseRegistrationChoice_in) {

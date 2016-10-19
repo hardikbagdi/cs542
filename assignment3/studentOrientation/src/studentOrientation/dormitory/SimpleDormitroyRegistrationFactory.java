@@ -9,10 +9,10 @@ public class SimpleDormitroyRegistrationFactory {
 		try {
 			switch (dormitoryRegistrationChoice_in) {
 			case OFFLINE_QUEUE:
-
+				dormitoryRegistrationI = new OfflineDormRegistration();
 				break;
 			case ONLINE_GAMING_CONTEST:
-
+				dormitoryRegistrationI = new OnlineDormRegistration();
 				break;
 			default:
 				throw new IllegalArgumentException();

@@ -9,10 +9,10 @@ public class SimpleCampusTourFactory {
 		try {
 			switch (campusTourChoice_in) {
 			case BUS_TOUR:
-
+				campusTourI = new BusRide();
 				break;
 			case WALKING_TOUR:
-
+				campusTourI = new WalkingTour();
 				break;
 			default:
 				throw new IllegalArgumentException();

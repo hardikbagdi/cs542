@@ -9,10 +9,10 @@ public class SimpleCourseRegistrationFactory {
 		try {
 			switch (courseRegistrationChoice_in) {
 			case FROM_EB_LABS:
-
+				courseRegistrationI = new ElectronicCourseRegistration();
 				break;
 			case REGISTRAR_OFFICE:
-
+				courseRegistrationI = new OfflineCourseRegistration();
 				break;
 			default:
 				throw new IllegalArgumentException();

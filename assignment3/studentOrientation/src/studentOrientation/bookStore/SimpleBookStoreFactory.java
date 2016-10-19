@@ -9,10 +9,10 @@ public class SimpleBookStoreFactory {
 		try {
 			switch (bookStoreChoice_in) {
 			case UNIVERSITY_BOOK_STORE:
-
+				bookStoreI = new UniversityBookStore();
 				break;
 			case MANDO_BOOK_STORE:
-
+				bookStoreI = new MandBookStore();
 				break;
 			default:
 				throw new IllegalArgumentException();
