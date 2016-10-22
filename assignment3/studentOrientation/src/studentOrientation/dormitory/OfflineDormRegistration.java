@@ -8,40 +8,46 @@ import studentOrientation.activityExpenses.DurationI;
 public class OfflineDormRegistration
 		implements DormitoryRegistrationI, CaloriesI, CarbonCostI, CurrencyCostI, DurationI {
 
+	private static final int AVG_REGISTRATION_DURATION = 60;
+	private static final int AVG_CALORIES_SPENT = 80;
+	private static final double AVG_CARBON_COST = 0.008;
+
 	@Override
 	public int getActivityDuration() {
-		// TODO Auto-generated method stub
-		return 0;
+		return AVG_REGISTRATION_DURATION;
 	}
 
 	@Override
 	public double getCostInUSD() {
-		// TODO Auto-generated method stub
-		return 0;
+
 	}
 
 	@Override
 	public double getCarbonCostInTonnes() {
-		// TODO Auto-generated method stub
-		return 0;
+		return AVG_CARBON_COST;
 	}
 
 	@Override
 	public int getCaloriesSpent() {
-		// TODO Auto-generated method stub
-		return 0;
+		return AVG_CALORIES_SPENT;
 	}
 
 	@Override
 	public String getCommunityName() {
-		// TODO Auto-generated method stub
-		return null;
+		// placeholder method
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getRoomNumber() {
+		// placeholder method
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public String getDescription() {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 }

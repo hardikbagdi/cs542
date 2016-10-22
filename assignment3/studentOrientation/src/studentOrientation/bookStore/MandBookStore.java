@@ -38,12 +38,24 @@ public class MandBookStore implements BookStoreI, CaloriesI, CarbonCostI, Curren
 
 	@Override
 	public void buyBook() {
-		// placeholder method
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public String getStoreName() {
 		return storeName;
+	}
+
+	@Override
+	public String getDescription() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(getStoreName());
+		sb.append("\nBuy books in a minute.");
+		sb.append("\nAverage time: " + AVG_CUSTOMER_DURATION + " minutes");
+		sb.append("\nAverage Calories spent: " + AVG_CALORIES_SPENT + " calories");
+		sb.append("\nAverage carbon cost:" + AVG_CARBON_COST + " tonnnes");
+		sb.append("\nCost of books(USD):" + getCostInUSD());
+		return sb.toString();
 	}
 
 }

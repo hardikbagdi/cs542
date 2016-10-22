@@ -8,4 +8,6 @@ public interface CourseRegistrationI {
 	public void getSurcharge();// placeholder
 
 	public PaymentMethod getPaymentMethod();
+
+	public String getDescription();
 }

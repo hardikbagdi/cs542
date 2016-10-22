@@ -19,7 +19,7 @@ public class OfflineCourseRegistration
 
 	@Override
 	public double getCostInUSD() {
-		
+		return 0;
 	}
 
 	@Override
