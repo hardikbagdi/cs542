@@ -91,14 +91,14 @@ public class StudentSchedule implements StudentScheduleI {
 	public void printItinerary() {
 		System.out.println("Name:" + getName());
 		System.out.println("ID:" + getID());
-		System.out.println("Orientation Itinerary:");
+		System.out.println("\nOrientation Itinerary:");
 		System.out.println("Take a tour of the campus");
 		System.out.println(this.campusTour.getDescription());
-		System.out.println("Book your dorm room");
+		System.out.println("\nBook your dorm room");
 		System.out.println(this.dormitoryRegistration.getDescription());
-		System.out.println("Register for courses");
+		System.out.println("\nRegister for courses");
 		System.out.println(this.courseRegistration.getDescription());
-		System.out.println("Buy books needed");
+		System.out.println("\nBuy books needed");
 		System.out.println(this.bookStore.getDescription());
 
 	}

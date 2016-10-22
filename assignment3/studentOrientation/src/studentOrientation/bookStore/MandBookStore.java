@@ -21,9 +21,9 @@ public class MandBookStore implements BookStoreI, CaloriesI, CarbonCostI, Curren
 	public double getCostInUSD() {
 		double totalCost = 0;
 		for (Books book : Books.values()) {
-			totalCost += (1.05) * book.getPrice();
+			totalCost += book.getPrice();
 		}
-		return totalCost;
+		return 1.05*totalCost;
 	}
 
 	@Override

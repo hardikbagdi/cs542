@@ -38,18 +38,27 @@ public class Driver {
 		BookStoreChoice bookStoreChoice = BookStoreChoice.MANDO_BOOK_STORE;
 
 		// OFFLINE_QUEUE, ONLINE_GAMING_CONTEST;
-		DormitoryRegistrationChoice dormitoryRegistrationChoice = DormitoryRegistrationChoice.OFFLINE_QUEUE;
+		DormitoryRegistrationChoice dormitoryRegistrationChoice = DormitoryRegistrationChoice.ONLINE_GAMING_CONTEST;
 
 		// REGISTRAR_OFFICE,FROM_EB_LABS;
-		CourseRegistrationChoice courseRegistrationChoice = CourseRegistrationChoice.FROM_EB_LABS;
+		CourseRegistrationChoice courseRegistrationChoice = CourseRegistrationChoice.REGISTRAR_OFFICE;
 
-		StudentScheduleI studentSchedule = new StudentSchedule(name, id, campusTourChoice, bookStoreChoice,
-				dormitoryRegistrationChoice, courseRegistrationChoice);
+		StudentScheduleI studentSchedule;
+		StudentOrientationScheduleWorkshopI scheduleWorkshop;
+		try {
+			studentSchedule = new StudentSchedule(name, id, campusTourChoice, bookStoreChoice,
+					dormitoryRegistrationChoice, courseRegistrationChoice);
 
-		StudentOrientationScheduleWorkshopI scheduleWorkshop = new StudentOrientationScheduleWorkshop();
+			scheduleWorkshop = new StudentOrientationScheduleWorkshop();
 
-		scheduleWorkshop.constructSchedule(studentSchedule);
+			scheduleWorkshop.constructSchedule(studentSchedule);
 
-		studentSchedule.printItinerary();
+			studentSchedule.printItinerary();
+		} catch (Exception exception) {
+			exception.printStackTrace();
+			System.exit(1);
+		} finally {
+
+		}
 	}
 }

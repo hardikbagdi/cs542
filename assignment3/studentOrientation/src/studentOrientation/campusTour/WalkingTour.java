@@ -10,7 +10,7 @@ public class WalkingTour implements CampusTourI, CaloriesI, CarbonCostI, Currenc
 	private static final int AVG_CALORIES_SPENT = 400;
 	private static final double AVG_CARBON_COST = 0.0001;
 	private static final String tourName = "Walk with Baxter";
-	private static final String description = "";
+	private static final String TAG_LINE = "Take a walk of around the campus!";
 
 	@Override
 	public int getActivityDuration() {
@@ -39,12 +39,18 @@ public class WalkingTour implements CampusTourI, CaloriesI, CarbonCostI, Currenc
 
 	@Override
 	public String getDescription() {
-
-		return description;
+		StringBuilder sb = new StringBuilder();
+		sb.append(getTourName());
+		sb.append(TAG_LINE);
+		sb.append("\nAverage time: " + AVG_TOUR_DURATION + " minutes");
+		sb.append("\nAverage Calories spent: " + AVG_CALORIES_SPENT + " calories");
+		sb.append("\nAverage carbon cost:" + AVG_CARBON_COST + " tonnnes");
+		sb.append("\nCost of Tour(USD):" + getCostInUSD());
+		return sb.toString();
 	}
 
 	@Override
 	public void printMap() {
-		// placeholder
+		throw new UnsupportedOperationException();
 	}
 }

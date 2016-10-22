@@ -11,6 +11,7 @@ public class OfflineCourseRegistration
 	private static final int AVG_REGISTRATION_DURATION = 60;
 	private static final int AVG_CALORIES_SPENT = 80;
 	private static final double AVG_CARBON_COST = 0.008;
+	private static String DESCRIPTION = "Register for your courses at the Registrar's Office.";
 
 	@Override
 	public int getActivityDuration() {
@@ -19,7 +20,10 @@ public class OfflineCourseRegistration
 
 	@Override
 	public double getCostInUSD() {
-		return 0;
+		int totalcost = 0;
+		for (UniversityFees fee : UniversityFees.values())
+			totalcost += fee.getFeeAmount();
+		return 0.97 * totalcost;
 	}
 
 	@Override
@@ -34,16 +38,24 @@ public class OfflineCourseRegistration
 
 	@Override
 	public void listCourses() {
-
-	}
-
-	@Override
-	public void getSurcharge() {
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public PaymentMethod getPaymentMethod() {
-		return PaymentMethod.CREDIT_CARD;
+		return PaymentMethod.CHEQUE;
+	}
+
+	@Override
+	public String getDescription() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Offline Course Registration");
+		sb.append("\n" + DESCRIPTION);
+		sb.append("\nAverage time: " + AVG_REGISTRATION_DURATION + " minutes");
+		sb.append("\nAverage Calories spent: " + AVG_CALORIES_SPENT + " calories");
+		sb.append("\nAverage carbon cost:" + AVG_CARBON_COST + " tonnnes");
+		sb.append("\nCost of Registration(USD):" + getCostInUSD());
+		sb.append("\nPayment Method:" + getPaymentMethod().getValue());
+		return sb.toString();
 	}
 }
