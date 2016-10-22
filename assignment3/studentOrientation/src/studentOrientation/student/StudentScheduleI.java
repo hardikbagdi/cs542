@@ -1,13 +1,11 @@
 package studentOrientation.student;
 
-import java.io.PrintWriter;
-
 public interface StudentScheduleI {
 	public String getName();
 
 	public Long getIdNumber();
 
-	public void printItinerary(PrintWriter printWriter);
+	public void printItinerary();
 
 	public void buildCampusTourItinerary();
 

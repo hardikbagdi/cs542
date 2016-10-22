@@ -49,5 +49,7 @@ public class Driver {
 		StudentOrientationScheduleWorkshopI scheduleWorkshop = new StudentOrientationScheduleWorkshop();
 
 		scheduleWorkshop.constructSchedule(studentSchedule);
+
+		studentSchedule.printItinerary();
 	}
 }

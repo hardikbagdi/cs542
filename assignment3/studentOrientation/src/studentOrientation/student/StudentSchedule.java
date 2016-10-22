@@ -1,11 +1,17 @@
 package studentOrientation.student;
 
-import java.io.PrintWriter;
-
 import studentOrientation.bookStore.BookStoreChoice;
+import studentOrientation.bookStore.BookStoreI;
+import studentOrientation.bookStore.SimpleBookStoreFactory;
 import studentOrientation.campusTour.CampusTourChoice;
+import studentOrientation.campusTour.CampusTourI;
+import studentOrientation.campusTour.SimpleCampusTourFactory;
 import studentOrientation.courseRegistration.CourseRegistrationChoice;
+import studentOrientation.courseRegistration.CourseRegistrationI;
+import studentOrientation.courseRegistration.SimpleCourseRegistrationFactory;
 import studentOrientation.dormitory.DormitoryRegistrationChoice;
+import studentOrientation.dormitory.DormitoryRegistrationI;
+import studentOrientation.dormitory.SimpleDormitroyRegistrationFactory;
 import studentOrientation.util.Logger;
 import studentOrientation.util.Logger.DebugLevel;
 
@@ -17,9 +23,11 @@ public class StudentSchedule implements StudentScheduleI {
 	BookStoreChoice bookStoreChoice;
 	DormitoryRegistrationChoice dormitoryRegistrationChoice;
 	CourseRegistrationChoice courseRegistrationChoice;
-	
-	
-	
+	CourseRegistrationI courseRegistration;
+	BookStoreI bookStore;
+	CampusTourI campusTour;
+	DormitoryRegistrationI dormitoryRegistration;
+
 	public StudentSchedule(String name_in, Long ID_in, CampusTourChoice campusTourChoice_in,
 			BookStoreChoice bookStoreChoice_in, DormitoryRegistrationChoice dormitoryRegistrationChoice_in,
 			CourseRegistrationChoice courseRegistrationChoice_in) {
@@ -60,31 +68,27 @@ public class StudentSchedule implements StudentScheduleI {
 
 	@Override
 	public void buildCampusTourItinerary() {
-		// TODO Auto-generated method stub
-
+		this.campusTour = SimpleCampusTourFactory.createCampusTour(this.campusTourChoice);
 	}
 
 	@Override
 	public void buildBookStoreItenerary() {
-		// TODO Auto-generated method stub
-
+		this.bookStore = SimpleBookStoreFactory.createBookStore(this.bookStoreChoice);
 	}
 
 	@Override
 	public void buildCourseRegistrationItenerary() {
-		// TODO Auto-generated method stub
-
+		this.courseRegistration = SimpleCourseRegistrationFactory.createBookStore(this.courseRegistrationChoice);
 	}
 
 	@Override
 	public void buildDormioryRegistrationItenerary() {
-		// TODO Auto-generated method stub
-
+		this.dormitoryRegistration = SimpleDormitroyRegistrationFactory
+				.createBookStore(this.dormitoryRegistrationChoice);
 	}
 
 	@Override
-	public void printItinerary(PrintWriter printWriter) {
-		// TODO Auto-generated method stub
+	public void printItinerary() {
 
 	}
 
