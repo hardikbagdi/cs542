@@ -5,8 +5,6 @@ public interface StudentScheduleI {
 
 	public Long getIdNumber();
 
-	public void printItinerary();
-
 	public void buildCampusTourItinerary();
 
 	public void buildBookStoreItenerary();

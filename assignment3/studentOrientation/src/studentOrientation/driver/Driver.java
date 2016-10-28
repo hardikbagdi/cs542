@@ -43,17 +43,17 @@ public class Driver {
 		// REGISTRAR_OFFICE,FROM_EB_LABS;
 		CourseRegistrationChoice courseRegistrationChoice = CourseRegistrationChoice.REGISTRAR_OFFICE;
 
-		StudentScheduleI studentSchedule;
+		StudentScheduleI studentScheduleI;
 		StudentOrientationScheduleWorkshopI scheduleWorkshop;
 		try {
-			studentSchedule = new StudentSchedule(name, id, campusTourChoice, bookStoreChoice,
+			studentScheduleI = new StudentSchedule(name, id, campusTourChoice, bookStoreChoice,
 					dormitoryRegistrationChoice, courseRegistrationChoice);
 
 			scheduleWorkshop = new StudentOrientationScheduleWorkshop();
 
-			scheduleWorkshop.constructSchedule(studentSchedule);
+			scheduleWorkshop.constructSchedule(studentScheduleI);
 
-			studentSchedule.printItinerary();
+			System.out.println(studentScheduleI);
 		} catch (Exception exception) {
 			exception.printStackTrace();
 			System.exit(1);

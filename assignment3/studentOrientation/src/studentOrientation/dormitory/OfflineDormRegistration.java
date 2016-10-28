@@ -12,7 +12,8 @@ public class OfflineDormRegistration
 	private static final int AVG_CALORIES_SPENT = 80;
 	private static final double AVG_CARBON_COST = 0.008;
 	private static final double SURCHARGE_PERCENTAGE = 2;
-	private static final String DESCRIPTION  = "Register for Dorm - Choose among the different communities.";
+	private static final String DESCRIPTION = "Register for Dorm - Choose among the different communities.";
+
 	@Override
 	public int getActivityDuration() {
 		return AVG_REGISTRATION_DURATION;
@@ -21,7 +22,7 @@ public class OfflineDormRegistration
 	@Override
 	public double getCostInUSD() {
 		double total = 0;
-		for(DormFees fee : DormFees.values())
+		for (DormFees fee : DormFees.values())
 			total += fee.getFeeAmount();
 		return total;
 	}
@@ -60,7 +61,7 @@ public class OfflineDormRegistration
 
 	@Override
 	public double getSurchargePercentage() {
-		return  SURCHARGE_PERCENTAGE;
+		return SURCHARGE_PERCENTAGE;
 	}
 
 }

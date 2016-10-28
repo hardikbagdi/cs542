@@ -1,9 +1,8 @@
 package studentOrientation.dormitory;
 
 public enum DormFees {
-	BASE_FARE("Base Fare",10000.0),
-	MEAL_PLAN("Meal plan",1000.0);
-	
+	BASE_FARE("Base Fare", 10000.0), MEAL_PLAN("Meal plan", 1000.0);
+
 	private String feeType;
 	private double amount;
 

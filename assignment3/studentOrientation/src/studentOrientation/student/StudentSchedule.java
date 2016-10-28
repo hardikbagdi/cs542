@@ -88,18 +88,20 @@ public class StudentSchedule implements StudentScheduleI {
 	}
 
 	@Override
-	public void printItinerary() {
-		System.out.println("Name:" + getName());
-		System.out.println("ID:" + getID());
-		System.out.println("\nOrientation Itinerary:");
-		System.out.println("Take a tour of the campus");
-		System.out.println(this.campusTour.getDescription());
-		System.out.println("\nBook your dorm room");
-		System.out.println(this.dormitoryRegistration.getDescription());
-		System.out.println("\nRegister for courses");
-		System.out.println(this.courseRegistration.getDescription());
-		System.out.println("\nBuy books needed");
-		System.out.println(this.bookStore.getDescription());
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Name:" + getName());
+		sb.append("ID:" + getID());
+		sb.append("\nOrientation Itinerary:");
+		sb.append("Take a tour of the campus");
+		sb.append(this.campusTour.getDescription());
+		sb.append("\nBook your dorm room");
+		sb.append(this.dormitoryRegistration.getDescription());
+		sb.append("\nRegister for courses");
+		sb.append(this.courseRegistration.getDescription());
+		sb.append("\nBuy books needed");
+		sb.append(this.bookStore.getDescription());
+		return sb.toString();
 
 	}
 
