@@ -10,9 +10,13 @@ public class Driver {
 
 	public static void main(String[] args) {
 		Logger.setDebugValue(DebugLevel.NO_OUTPUT);
-		if (!validateArgs(args)) {
-			System.out.println(usageString);
-			return;
+		try {
+			if (!validateArgs(args)) {
+				System.out.println(usageString);
+				return;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
