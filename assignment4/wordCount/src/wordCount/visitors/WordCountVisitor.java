@@ -6,12 +6,11 @@ import wordCount.store.Tree;
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public class WordCountVisitor implements Visitor {
+public class WordCountVisitor<T> implements Visitor<T> {
 
 	@Override
-	public void visit(Tree tree) {
-		// TODO Auto-generated method stub
-
+	public void visit(Tree<T> tree) {
+		
 	}
 
 }

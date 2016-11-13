@@ -6,9 +6,13 @@ import wordCount.visitors.Visitor;
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public interface Tree {
+public interface Tree<T> {
 
 	// tree api
-	// force accept()
-	public void accept(Visitor visitor);
+	public void insert(T toInsert);
+	public T remove(T toRemove);
+	public boolean contains(T toCheck);
+	
+	// force accept() implementation
+	public void accept(Visitor<T> visitor);
 }

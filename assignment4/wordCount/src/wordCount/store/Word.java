@@ -4,18 +4,18 @@ package wordCount.store;
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public class NodeData {
+public class Word {
 	private String word;
 	private long count;
 	private int charCount;
 
-	public NodeData(String word_in, long count_in) {
+	public Word(String word_in, long count_in) {
 		setWord(word_in);
 		setCount(0);
 		setCharCount(word_in.length());
 	}
 
-	public NodeData(String word_in) {
+	public Word(String word_in) {
 		this(word_in, 0L);
 	}
 

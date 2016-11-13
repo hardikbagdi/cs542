@@ -1,29 +1,43 @@
 package wordCount.store;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public class Node implements NodeI, NodeObserver, NodeSubject {
+class Node<T> implements  NodeObserver<T>, NodeSubject<T> {
 
-	@Override
-	public NodeI getLeftChild() {
+	private List<NodeObserver> listeners;
+	private Tree<T> tree;
+	private T data;
+	private Node<T> left,right;
+	public Node(T data_in) {
+		data = data_in;
+		listeners = new ArrayList<>();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Node<T> getLeftChild() {
+				return left;
+	}
+
+	public Node<T> getRightChild() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public NodeI getRightChild() {
+	public T getData() {
 		// TODO Auto-generated method stub
-		return null;
+		return data;
 	}
 
-	@Override
-	public NodeData getData() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setData(T data) {
+		this.data = data;
+		notifyObserver();
 	}
-
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		// TODO Auto-generated method stub
@@ -31,26 +45,28 @@ public class Node implements NodeI, NodeObserver, NodeSubject {
 	}
 
 	@Override
-	public void registerObserver(NodeObserver nodeObserver) {
+	public void registerObserver(Node<T> nodeObserver) {
 		// TODO Auto-generated method stub
-		
+		listeners.add(nodeObserver);
 	}
 
 	@Override
-	public void removeObserver(NodeObserver nodeObserver) {
+	public void removeObserver(Node<T> nodeObserver) {
 		// TODO Auto-generated method stub
-		
+		listeners.remove(nodeObserver);
 	}
 
 	@Override
-	public void notifyObserver(NodeI node) {
+	public void notifyObserver() {
 		// TODO Auto-generated method stub
-		
+		for (NodeObserver node : listeners ){
+			node.update(this.getData());
+		}
 	}
 
 	@Override
-	public void update(NodeI node) {
+	public void update(T data) {
 		// TODO Auto-generated method stub
-		
+		//depends what changed
 	}
 }

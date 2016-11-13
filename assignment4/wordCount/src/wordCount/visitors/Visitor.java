@@ -6,6 +6,6 @@ import wordCount.store.Tree;
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public interface Visitor {
-	public void visit(Tree tree);
+public interface Visitor<T> {
+	public void visit(Tree<T> tree);
 }
