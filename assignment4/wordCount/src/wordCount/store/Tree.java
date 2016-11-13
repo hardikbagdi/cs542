@@ -10,9 +10,11 @@ public interface Tree<T> {
 
 	// tree api
 	public void insert(T toInsert);
-	public T remove(T toRemove);
+
+	public void remove(T toRemove);
+
 	public boolean contains(T toCheck);
-	
+
 	// force accept() implementation
 	public void accept(Visitor<T> visitor);
 }

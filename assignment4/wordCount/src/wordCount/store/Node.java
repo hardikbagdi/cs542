@@ -8,25 +8,30 @@ import java.util.List;
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-class Node<T> implements  NodeObserver<T>, NodeSubject<T> {
+public class Node<T extends Comparable<T>> implements NodeObserver<T>, NodeSubject<T> {
 
-	private List<NodeObserver> listeners;
-	private Tree<T> tree;
+	private List<NodeObserver<T>> listeners;
+	private Tree<T> tree; // the tree which this node belongs to
 	private T data;
-	private Node<T> left,right;
+	private Node<T> left, right;
+
 	public Node(T data_in) {
 		data = data_in;
 		listeners = new ArrayList<>();
-		// TODO Auto-generated constructor stub
 	}
-	
+
+	public Node(T data_in, Tree<T> tree_in) {
+		this(data_in);
+		tree = tree_in;
+	}
+
 	public Node<T> getLeftChild() {
-				return left;
+		return left;
 	}
 
 	public Node<T> getRightChild() {
 		// TODO Auto-generated method stub
-		return null;
+		return right;
 	}
 
 	public T getData() {
@@ -38,6 +43,7 @@ class Node<T> implements  NodeObserver<T>, NodeSubject<T> {
 		this.data = data;
 		notifyObserver();
 	}
+
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		// TODO Auto-generated method stub
@@ -59,7 +65,7 @@ class Node<T> implements  NodeObserver<T>, NodeSubject<T> {
 	@Override
 	public void notifyObserver() {
 		// TODO Auto-generated method stub
-		for (NodeObserver node : listeners ){
+		for (NodeObserver<T> node : listeners) {
 			node.update(this.getData());
 		}
 	}
@@ -67,6 +73,6 @@ class Node<T> implements  NodeObserver<T>, NodeSubject<T> {
 	@Override
 	public void update(T data) {
 		// TODO Auto-generated method stub
-		//depends what changed
+		// depends what changed
 	}
 }

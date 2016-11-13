@@ -4,7 +4,7 @@ package wordCount.store;
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public class Word {
+public class Word implements Comparable<Word> {
 	private String word;
 	private long count;
 	private int charCount;
@@ -43,4 +43,16 @@ public class Word {
 		this.charCount = charCount;
 	}
 
+	@Override
+	public String toString() {
+		return "Word: " + this.word + " Count: " + count;
+	}
+
+	@Override
+	public int compareTo(Word w2) {
+		if (!(w2 instanceof Word)) {
+			return 1;
+		}
+		return this.getWord().compareTo(w2.getWord());
+	}
 }
