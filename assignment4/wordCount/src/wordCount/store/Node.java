@@ -25,6 +25,14 @@ public class Node<T extends Comparable<T>> implements NodeObserver<T>, NodeSubje
 		tree = tree_in;
 	}
 
+	public void setLeftChild(Node<T> leftChild_in) {
+		left = leftChild_in;
+	}
+
+	public void setRightChild(Node<T> rightChild_in) {
+		right = rightChild_in;
+	}
+
 	public Node<T> getLeftChild() {
 		return left;
 	}

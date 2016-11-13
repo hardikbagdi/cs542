@@ -2,14 +2,17 @@ package wordCount.driver;
 
 import java.io.File;
 
-import wordCount.store.BinaryTree;
+import wordCount.store.BinarySearchTree;
 import wordCount.store.Tree;
+import wordCount.store.Word;
 import wordCount.util.FileProcessor;
 import wordCount.util.FileProcessor.FileMode;
 import wordCount.util.Logger;
 import wordCount.util.Logger.DebugLevel;
+import wordCount.visitors.CloneObserverVisitor;
 import wordCount.visitors.PopulateVisitor;
 import wordCount.visitors.Visitor;
+import wordCount.visitors.WordCountVisitor;
 
 /**
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
@@ -28,8 +31,8 @@ public class Driver {
 			String inputFile = args[0];
 			String outputFile = args[1];
 			FileProcessor fileReader, fileWriter;
-			Tree tree;
-			Visitor visitor1, visitor2, visitor3;
+			Tree<Word> tree;
+			Visitor<Word> visitor1, visitor2, visitor3;
 			int iterations = Integer.parseInt(args[2]);
 
 			long startTime = System.currentTimeMillis();
@@ -37,9 +40,10 @@ public class Driver {
 				// declare/instantiate the data structure and visitors
 				fileReader = new FileProcessor(inputFile, FileMode.READ);
 				fileWriter = new FileProcessor(outputFile, FileMode.WRITE);
-				tree = new BinaryTree();
-				visitor1 = new PopulateVisitor(fileReader);
-				visitor2 = new PopulateVisitor(fileWriter);
+				tree = new BinarySearchTree<Word>();
+				visitor1 = new PopulateVisitor<Word>(fileReader);
+				visitor2 = new WordCountVisitor<Word>(fileWriter);
+				visitor3 = new CloneObserverVisitor<Word>();
 				// code to visit with the PopulateVisitor
 				visitor1.visit(tree);
 				// code to visit with the WordCountVisitor.
@@ -49,6 +53,23 @@ public class Driver {
 			long totalTime = (finishTime - startTime) / (long) iterations;
 			System.out.println(totalTime);
 
+			// observer relation
+			// declare/instantiate the data structure and visitors
+			fileReader = new FileProcessor(inputFile, FileMode.READ);
+			fileWriter = new FileProcessor(outputFile, FileMode.WRITE);
+			tree = new BinarySearchTree<Word>();
+			visitor1 = new PopulateVisitor<Word>(fileReader);
+			visitor2 = new WordCountVisitor<Word>(fileWriter);
+			visitor3 = new CloneObserverVisitor<Word>();
+			// code to visit with the PopulateVisitor
+			visitor1.visit(tree);
+			// code to visit with the WordCountVisitor.
+			visitor2.visit(tree);
+			// setup a clone tree
+			visitor3.visit(tree);
+			Tree<Word> clonedTree = ((CloneObserverVisitor<Word>) visitor3).getClonedTree();
+
+			// code to change the original tree some how goes here
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
