@@ -3,7 +3,9 @@ package wordCount.driver;
 import java.io.File;
 
 import wordCount.store.BinarySearchTree;
+import wordCount.store.Node;
 import wordCount.store.Tree;
+import wordCount.store.Word;
 import wordCount.util.FileProcessor;
 import wordCount.util.FileProcessor.FileMode;
 import wordCount.util.Logger;
@@ -79,8 +81,10 @@ public class Driver {
 	}
 
 	private static void testObserver(Tree tree, Tree clonedTree) {
-		// TODO Auto-generated method stub
-		
+		Node root = tree.getRoot();
+		Word word = root.getData();
+		root.setData(new Word(word.getWord(),100));
+		System.out.println(clonedTree.getRoot());
 	}
 
 	private static boolean validateArgs(String[] args) {

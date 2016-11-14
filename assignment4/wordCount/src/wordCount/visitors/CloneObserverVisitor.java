@@ -20,7 +20,9 @@ public class CloneObserverVisitor implements Visitor {
 		try {
 			tree = tree_in;
 			clonedTree = (Tree) tree.clone();
-			clonedTree.setRoot((Node) (tree.getRoot().clone()));
+			Node clonedRoot = (Node) (tree.getRoot().clone());
+			clonedTree.setRoot(clonedRoot);
+			clonedRoot.setTree(clonedTree);
 			tree.getRoot().registerObserver(clonedTree.getRoot());
 			recursiveClone(clonedTree.getRoot());
 
@@ -38,6 +40,7 @@ public class CloneObserverVisitor implements Visitor {
 			save = parent.getLeftChild();
 			cloned = (Node) save.clone();
 			parent.setLeftChild(cloned);
+			cloned.setTree(clonedTree);
 			save.registerObserver(cloned);
 			recursiveClone(cloned);
 		}
@@ -45,6 +48,7 @@ public class CloneObserverVisitor implements Visitor {
 			save = parent.getRightChild();
 			cloned = (Node) save.clone();
 			parent.setRightChild(cloned);
+			cloned.setTree(clonedTree);
 			save.registerObserver(cloned);
 			recursiveClone(cloned);
 		}

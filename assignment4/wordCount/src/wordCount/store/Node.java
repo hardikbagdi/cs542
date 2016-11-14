@@ -11,6 +11,13 @@ public class Node implements NodeObserver, NodeSubject, Cloneable {
 
 	private List<NodeObserver> listeners;
 	private Tree tree; // the tree which this node belongs to
+	public Tree getTree() {
+		return tree;
+	}
+
+	public void setTree(Tree tree) {
+		this.tree = tree;
+	}
 	private Word data;
 	private Node left, right;
 
@@ -27,7 +34,8 @@ public class Node implements NodeObserver, NodeSubject, Cloneable {
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		Node cloned = (Node) super.clone();
-		cloned.setData((Word) data.clone());
+		cloned.data = ((Word) data.clone());
+		cloned.listeners = new ArrayList<>();//somehow clear the listners		
 		// set left,right to null or not?
 		return cloned;
 	}
