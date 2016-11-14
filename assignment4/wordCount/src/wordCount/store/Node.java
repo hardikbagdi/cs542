@@ -8,46 +8,46 @@ import java.util.List;
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public class Node<T extends Comparable<T>> implements NodeObserver<T>, NodeSubject<T> {
+public class Node implements NodeObserver, NodeSubject {
 
-	private List<NodeObserver<T>> listeners;
-	private Tree<T> tree; // the tree which this node belongs to
-	private T data;
-	private Node<T> left, right;
+	private List<NodeObserver> listeners;
+	private Tree tree; // the tree which this node belongs to
+	private Word data;
+	private Node left, right;
 
-	public Node(T data_in) {
+	public Node(Word data_in) {
 		data = data_in;
 		listeners = new ArrayList<>();
 	}
 
-	public Node(T data_in, Tree<T> tree_in) {
+	public Node(Word data_in, Tree tree_in) {
 		this(data_in);
 		tree = tree_in;
 	}
 
-	public void setLeftChild(Node<T> leftChild_in) {
+	public void setLeftChild(Node leftChild_in) {
 		left = leftChild_in;
 	}
 
-	public void setRightChild(Node<T> rightChild_in) {
+	public void setRightChild(Node rightChild_in) {
 		right = rightChild_in;
 	}
 
-	public Node<T> getLeftChild() {
+	public Node getLeftChild() {
 		return left;
 	}
 
-	public Node<T> getRightChild() {
+	public Node getRightChild() {
 		// TODO Auto-generated method stub
 		return right;
 	}
 
-	public T getData() {
+	public Word getData() {
 		// TODO Auto-generated method stub
 		return data;
 	}
 
-	public void setData(T data) {
+	public void setData(Word data) {
 		this.data = data;
 		notifyObserver();
 	}
@@ -59,13 +59,13 @@ public class Node<T extends Comparable<T>> implements NodeObserver<T>, NodeSubje
 	}
 
 	@Override
-	public void registerObserver(Node<T> nodeObserver) {
+	public void registerObserver(Node nodeObserver) {
 		// TODO Auto-generated method stub
 		listeners.add(nodeObserver);
 	}
 
 	@Override
-	public void removeObserver(Node<T> nodeObserver) {
+	public void removeObserver(Node nodeObserver) {
 		// TODO Auto-generated method stub
 		listeners.remove(nodeObserver);
 	}
@@ -73,13 +73,13 @@ public class Node<T extends Comparable<T>> implements NodeObserver<T>, NodeSubje
 	@Override
 	public void notifyObserver() {
 		// TODO Auto-generated method stub
-		for (NodeObserver<T> node : listeners) {
+		for (NodeObserver node : listeners) {
 			node.update(this.getData());
 		}
 	}
 
 	@Override
-	public void update(T data) {
+	public void update(Word data) {
 		// TODO Auto-generated method stub
 		// depends what changed
 	}

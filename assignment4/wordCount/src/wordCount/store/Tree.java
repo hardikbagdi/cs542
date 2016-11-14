@@ -6,18 +6,23 @@ import wordCount.visitors.Visitor;
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public interface Tree<T extends Comparable<T>> {
+public interface Tree {
 
 	// tree api
-	public void insert(T toInsert);
-	public void insert(Node<T> node);
+	public void insert(Word word);
 
-	public void remove(T toRemove);
-	public void remove(Node<T> node);
+	public void insert(Node node);
 
-	public boolean contains(T toCheck);
+	public void remove(Word word);
 
-	public Node<T> getNode(T data);
+	public void remove(Node node);
+
+	public boolean contains(Word word);
+
+	public boolean contains(Node toCheck);
+
+	public Node getNode(Word data);
+
 	// force accept() implementation
-	public void accept(Visitor<T> visitor);
+	public void accept(Visitor visitor);
 }

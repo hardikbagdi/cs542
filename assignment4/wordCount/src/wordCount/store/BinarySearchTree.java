@@ -9,30 +9,38 @@ import wordCount.visitors.Visitor;
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public class BinarySearchTree<T extends Comparable<T>> implements Tree<T>, Cloneable, Iterable<T> {
+public class BinarySearchTree implements Tree, Cloneable {
 
-	Node<T> root;
-
-	@Override
-	public void accept(Visitor<T> visitor) {
-		visitor.visit(this);
-	}
+	private Node root;
 
 	public BinarySearchTree() {
 		Logger.writeMessage("Constructor called for" + this.getClass().getName(), DebugLevel.CONSTRUCTOR);
 	}
 
-	public void insert(T itemToInsert) {
-		insertHelper(root, itemToInsert);
+	public Node getRoot() {
+		return root;
 	}
 
-	public void insert(Node<T> nodeToInsert) {
+	public void setRoot(Node root_in) {
+		root = root_in;
+	}
+
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
+	}
+
+	public void insert(Word itemWordoInsert) {
+		insertHelper(root, itemWordoInsert);
+	}
+
+	public void insert(Node nodeWordoInsert) {
 
 	}
 
-	private Node<T> insertHelper(Node<T> parent, T itemToInsert) {
+	private Node insertHelper(Node parent, Word itemToInsert) {
 		if (parent == null)
-			return new Node<T>(itemToInsert, this);
+			return new Node(itemToInsert, this);
 		int compare = parent.getData().compareTo(itemToInsert);
 		if (compare == 0) {
 			return parent;
@@ -43,25 +51,25 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T>, Clone
 		}
 	}
 
-	public void remove(Node<T> nodeToRemove) {
-		remove(nodeToRemove.getData());
+	public void remove(Node nodeWordoRemove) {
+		remove(nodeWordoRemove.getData());
 	}
 
-	public void remove(T itemToRemove) {
-		if (itemToRemove == null)
+	public void remove(Word itemWordoRemove) {
+		if (itemWordoRemove == null)
 			return;
-		removeHelper(root, itemToRemove);
+		removeHelper(root, itemWordoRemove);
 	}
 
-	private Node<T> removeHelper(Node<T> parent, T itemToRemove) {
+	private Node removeHelper(Node parent, Word itemWordoRemove) {
 		if (parent == null) {
 			throw new RuntimeException("Cannot delete the element which doesn't exist.");
 		}
-		int compare = parent.getData().compareTo(itemToRemove);
+		int compare = parent.getData().compareTo(itemWordoRemove);
 		if (compare < 0) {
-			parent.setLeftChild(removeHelper(parent.getLeftChild(), itemToRemove));
+			parent.setLeftChild(removeHelper(parent.getLeftChild(), itemWordoRemove));
 		} else if (compare > 0) {
-			parent.setRightChild(removeHelper(parent.getRightChild(), itemToRemove));
+			parent.setRightChild(removeHelper(parent.getRightChild(), itemWordoRemove));
 		} else {
 			// the current node has to be removed
 			if (parent.getLeftChild() == null)
@@ -69,7 +77,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T>, Clone
 			if (parent.getRightChild() == null)
 				return parent.getLeftChild();
 			// we need to delete the rightmost node in the left tree.
-			T rightMostData = getRightMostData(parent);
+			Word rightMostData = getRightMostData(parent);
 			parent.setData(rightMostData);
 			// now delete the leftmost node
 			// we can be sure that there will be an empty pointer there
@@ -78,26 +86,20 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T>, Clone
 		return parent;
 	}
 
-	private T getRightMostData(Node<T> parent) {
+	private Word getRightMostData(Node parent) {
 		while (parent.getRightChild() != null)
 			parent = parent.getLeftChild();
 		return parent.getData();
 	}
 
 	@Override
-	public Iterator<T> iterator() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean contains(T toCheck) {
+	public boolean contains(Word toCheck) {
 		if (toCheck == null)
 			return false;
 		return containsHelper(root, toCheck);
 	}
 
-	private boolean containsHelper(Node<T> parent, T toCheck) {
+	private boolean containsHelper(Node parent, Word toCheck) {
 		if (parent == null) {
 			return false;
 		}
@@ -111,13 +113,19 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T>, Clone
 		}
 	}
 
-	public Node<T> getNode(T data) {
+	@Override
+	public boolean contains(Node toCheck) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public Node getNode(Word data) {
 		if (data == null)
 			return null;
 		return getNodeHelper(root, data);
 	}
 
-	private Node<T> getNodeHelper(Node<T> parent, T toCheck) {
+	private Node getNodeHelper(Node parent, Word toCheck) {
 		if (parent == null) {
 			return null;
 		}
@@ -133,7 +141,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T>, Clone
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
+		// WordODO Auto-generated method stub
 		return super.toString();
 	}
 }

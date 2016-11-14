@@ -9,18 +9,18 @@ import wordCount.util.FileProcessor;
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public class PopulateVisitor<T> implements Visitor<T> {
+public class PopulateVisitor implements Visitor {
 
 	private FileProcessor fileProcessor;
-	private Tree<T> tree;
+	private Tree tree;
 
 	public PopulateVisitor(FileProcessor fileProcessor_in) {
 		fileProcessor = fileProcessor_in;
 	}
 
 	@Override
-	public void visit(Tree<T> tree_in) {
+	public void visit(Tree tree_in) {
 		tree = tree_in;
-			
+
 	}
 }

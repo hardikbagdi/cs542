@@ -2,20 +2,20 @@ package wordCount.visitors;
 
 import wordCount.store.Tree;
 
-public class CloneObserverVisitor<T> implements Visitor<T> {
+public class CloneObserverVisitor implements Visitor {
 
-	private Tree<T> tree, clonedTree;
+	private Tree tree, clonedTree;
 
 	public CloneObserverVisitor() {
 
 	}
 
 	@Override
-	public void visit(Tree<T> tree_in) {
+	public void visit(Tree tree_in) {
 		tree = tree_in;
 	}
 
-	public Tree<T> getClonedTree() {
+	public Tree getClonedTree() {
 		return clonedTree;
 	}
 

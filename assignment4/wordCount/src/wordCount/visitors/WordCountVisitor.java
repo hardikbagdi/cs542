@@ -7,7 +7,7 @@ import wordCount.util.FileProcessor;
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public class WordCountVisitor<T> implements Visitor<T> {
+public class WordCountVisitor implements Visitor {
 
 	private FileProcessor fileProcessor;
 
@@ -16,7 +16,7 @@ public class WordCountVisitor<T> implements Visitor<T> {
 	}
 
 	@Override
-	public void visit(Tree<T> tree) {
+	public void visit(Tree tree) {
 
 	}
 

@@ -31,8 +31,8 @@ public class Driver {
 			String inputFile = args[0];
 			String outputFile = args[1];
 			FileProcessor fileReader, fileWriter;
-			Tree<Word> tree;
-			Visitor<Word> visitor1, visitor2, visitor3;
+			Tree tree;
+			Visitor visitor1, visitor2, visitor3;
 			int iterations = Integer.parseInt(args[2]);
 
 			long startTime = System.currentTimeMillis();
@@ -40,10 +40,10 @@ public class Driver {
 				// declare/instantiate the data structure and visitors
 				fileReader = new FileProcessor(inputFile, FileMode.READ);
 				fileWriter = new FileProcessor(outputFile, FileMode.WRITE);
-				tree = new BinarySearchTree<Word>();
-				visitor1 = new PopulateVisitor<Word>(fileReader);
-				visitor2 = new WordCountVisitor<Word>(fileWriter);
-				visitor3 = new CloneObserverVisitor<Word>();
+				tree = new BinarySearchTree();
+				visitor1 = new PopulateVisitor(fileReader);
+				visitor2 = new WordCountVisitor(fileWriter);
+				visitor3 = new CloneObserverVisitor();
 				// code to visit with the PopulateVisitor
 				visitor1.visit(tree);
 				// code to visit with the WordCountVisitor.
@@ -57,17 +57,17 @@ public class Driver {
 			// declare/instantiate the data structure and visitors
 			fileReader = new FileProcessor(inputFile, FileMode.READ);
 			fileWriter = new FileProcessor(outputFile, FileMode.WRITE);
-			tree = new BinarySearchTree<Word>();
-			visitor1 = new PopulateVisitor<Word>(fileReader);
-			visitor2 = new WordCountVisitor<Word>(fileWriter);
-			visitor3 = new CloneObserverVisitor<Word>();
+			tree = new BinarySearchTree();
+			visitor1 = new PopulateVisitor(fileReader);
+			visitor2 = new WordCountVisitor(fileWriter);
+			visitor3 = new CloneObserverVisitor();
 			// code to visit with the PopulateVisitor
 			visitor1.visit(tree);
 			// code to visit with the WordCountVisitor.
 			visitor2.visit(tree);
 			// setup a clone tree
 			visitor3.visit(tree);
-			Tree<Word> clonedTree = ((CloneObserverVisitor<Word>) visitor3).getClonedTree();
+			Tree clonedTree = ((CloneObserverVisitor) visitor3).getClonedTree();
 
 			// code to change the original tree some how goes here
 		} catch (Exception e) {
