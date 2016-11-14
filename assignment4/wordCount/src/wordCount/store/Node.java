@@ -1,14 +1,13 @@
 package wordCount.store;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public class Node implements NodeObserver, NodeSubject {
+public class Node implements NodeObserver, NodeSubject, Cloneable {
 
 	private List<NodeObserver> listeners;
 	private Tree tree; // the tree which this node belongs to
@@ -25,6 +24,14 @@ public class Node implements NodeObserver, NodeSubject {
 		tree = tree_in;
 	}
 
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		Node cloned = (Node) super.clone();
+		cloned.setData((Word) data.clone());
+		// set left,right to null or not?
+		return cloned;
+	}
+
 	public void setLeftChild(Node leftChild_in) {
 		left = leftChild_in;
 	}
@@ -38,12 +45,10 @@ public class Node implements NodeObserver, NodeSubject {
 	}
 
 	public Node getRightChild() {
-		// TODO Auto-generated method stub
 		return right;
 	}
 
 	public Word getData() {
-		// TODO Auto-generated method stub
 		return data;
 	}
 
@@ -53,26 +58,17 @@ public class Node implements NodeObserver, NodeSubject {
 	}
 
 	@Override
-	public Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return super.clone();
-	}
-
-	@Override
 	public void registerObserver(Node nodeObserver) {
-		// TODO Auto-generated method stub
 		listeners.add(nodeObserver);
 	}
 
 	@Override
 	public void removeObserver(Node nodeObserver) {
-		// TODO Auto-generated method stub
 		listeners.remove(nodeObserver);
 	}
 
 	@Override
 	public void notifyObserver() {
-		// TODO Auto-generated method stub
 		for (NodeObserver node : listeners) {
 			node.update(this.getData());
 		}

@@ -4,7 +4,6 @@ import java.io.File;
 
 import wordCount.store.BinarySearchTree;
 import wordCount.store.Tree;
-import wordCount.store.Word;
 import wordCount.util.FileProcessor;
 import wordCount.util.FileProcessor.FileMode;
 import wordCount.util.Logger;
@@ -72,8 +71,8 @@ public class Driver {
 			// code to change the original tree some how goes here
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			
+		} finally {
+
 		}
 	}
 

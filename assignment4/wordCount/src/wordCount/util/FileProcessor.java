@@ -3,7 +3,6 @@ package wordCount.util;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -44,7 +43,7 @@ public class FileProcessor {
 		if (filename_in == null || fileMode_in == null)
 			throw new IllegalArgumentException();
 		File file = new File(filename_in);
-		if (fileMode_in == fileMode_in.READ && !file.canRead())
+		if (fileMode_in == FileMode.READ && !file.canRead())
 			throw new IllegalArgumentException("Can't read file " + filename_in);
 		if (fileMode_in == FileMode.WRITE && file.exists() && !file.delete())
 			throw new IllegalArgumentException("Output file exists and not removable");
@@ -88,7 +87,6 @@ public class FileProcessor {
 		if (fileMode == FileMode.READ) {
 			throw new IllegalAccessException("Cant write to a file which is being read.");
 		}
-		String line = null;
 		try {
 			bufferedWriter.write(line_in);
 		} catch (Exception e) {

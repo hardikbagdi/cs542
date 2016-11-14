@@ -1,6 +1,5 @@
 package wordCount.store;
 
-import java.util.Iterator;
 import wordCount.util.Logger;
 import wordCount.util.Logger.DebugLevel;
 import wordCount.visitors.Visitor;
@@ -15,6 +14,11 @@ public class BinarySearchTree implements Tree, Cloneable {
 
 	public BinarySearchTree() {
 		Logger.writeMessage("Constructor called for" + this.getClass().getName(), DebugLevel.CONSTRUCTOR);
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 
 	public Node getRoot() {
@@ -115,8 +119,11 @@ public class BinarySearchTree implements Tree, Cloneable {
 
 	@Override
 	public boolean contains(Node toCheck) {
-		// TODO Auto-generated method stub
-		return false;
+		if (toCheck == null)
+			return false;
+		if (toCheck.getData() == null)
+			return false;
+		return contains(toCheck.getData());
 	}
 
 	public Node getNode(Word data) {

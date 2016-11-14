@@ -10,7 +10,9 @@ public interface Tree {
 
 	// tree api
 	public Node getRoot();
+
 	public void setRoot(Node node);
+
 	public void insert(Word word);
 
 	public void insert(Node node);
@@ -27,4 +29,7 @@ public interface Tree {
 
 	// force accept() implementation
 	public void accept(Visitor visitor);
+
+	// clone force
+	public Object clone() throws CloneNotSupportedException;
 }

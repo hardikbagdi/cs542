@@ -14,6 +14,7 @@ public class WordCountVisitor implements Visitor {
 
 	private FileProcessor fileProcessor;
 	private int uniqueWords, totalWords, characters;
+
 	public WordCountVisitor(FileProcessor fileProcessor_in) {
 		fileProcessor = fileProcessor_in;
 	}
@@ -26,36 +27,35 @@ public class WordCountVisitor implements Visitor {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
-		}finally {
-			
+		} finally {
+
 		}
 	}
-	
-	
+
 	private void parseTree(Tree tree) {
 		Node root = tree.getRoot();
 		Stack<Node> stack = new Stack<>();
-		Node left,right;
+		Node left, right;
 		stack.push(root);
 		Node cur;
-		while(!stack.isEmpty()){
+		while (!stack.isEmpty()) {
 			cur = stack.pop();
 			left = cur.getLeftChild();
 			right = cur.getRightChild();
-			if(left != null)
+			if (left != null)
 				stack.push(left);
-			if(right!= null)
+			if (right != null)
 				stack.push(right);
-			characters+=cur.getData().getCharCount();
-			totalWords+= cur.getData().getCount();
+			characters += cur.getData().getCharCount();
+			totalWords += cur.getData().getCount();
 			uniqueWords++;
 		}
-		
+
 	}
 
-	private void printToFile() throws IllegalAccessException{
-		fileProcessor.putLine("Total words: "+totalWords);
-		fileProcessor.putLine("Distinct Words: "+uniqueWords);
+	private void printToFile() throws IllegalAccessException {
+		fileProcessor.putLine("Total words: " + totalWords);
+		fileProcessor.putLine("Distinct Words: " + uniqueWords);
 		fileProcessor.putLine("Characters: " + characters);
 	}
 

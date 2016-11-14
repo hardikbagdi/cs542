@@ -4,7 +4,7 @@ package wordCount.store;
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public class Word implements Comparable<Word> {
+public class Word implements Comparable<Word>, Cloneable {
 	private String word;
 	private long count;
 	private int charCount;
@@ -17,6 +17,11 @@ public class Word implements Comparable<Word> {
 
 	public Word(String word_in) {
 		this(word_in, 0L);
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 
 	public String getWord() {

@@ -46,8 +46,8 @@ public class PopulateVisitor implements Visitor {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
-		}finally {
-			
+		} finally {
+
 		}
 	}
 }
