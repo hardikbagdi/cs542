@@ -46,7 +46,7 @@ public class WordCountVisitor implements Visitor {
 				stack.push(left);
 			if (right != null)
 				stack.push(right);
-			characters += cur.getData().getCharCount();
+			characters += cur.getData().getCharCount()*cur.getData().getCount();
 			totalWords += cur.getData().getCount();
 			uniqueWords++;
 		}
@@ -54,9 +54,9 @@ public class WordCountVisitor implements Visitor {
 	}
 
 	private void printToFile() throws IllegalAccessException {
-		fileProcessor.putLine("Total words: " + totalWords);
-		fileProcessor.putLine("Distinct Words: " + uniqueWords);
-		fileProcessor.putLine("Characters: " + characters);
+		fileProcessor.putLine("Total words:\t" + totalWords);
+		fileProcessor.putLine("Distinct Words:\t" + uniqueWords);
+		fileProcessor.putLine("Characters:\t" + characters);
 	}
 
 }

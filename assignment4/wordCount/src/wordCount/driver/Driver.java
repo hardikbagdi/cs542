@@ -49,8 +49,8 @@ public class Driver {
 				visitor2.visit(tree);
 			}
 			long finishTime = System.currentTimeMillis();
-			long totalTime = (finishTime - startTime) / (long) iterations;
-			System.out.println(totalTime);
+			long avgTime = (finishTime - startTime) / (long) iterations;
+			System.out.println(avgTime);
 
 			// observer relation
 			// declare/instantiate the data structure and visitors
@@ -67,13 +67,20 @@ public class Driver {
 			// setup a clone tree
 			visitor3.visit(tree);
 			Tree clonedTree = ((CloneObserverVisitor) visitor3).getClonedTree();
-
-			// code to change the original tree some how goes here
+			
+			// code to change the original tree and then observer changes
+			testObserver(tree,clonedTree);
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.exit(1);
 		} finally {
 
 		}
+	}
+
+	private static void testObserver(Tree tree, Tree clonedTree) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private static boolean validateArgs(String[] args) {

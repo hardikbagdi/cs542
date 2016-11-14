@@ -6,7 +6,7 @@ package wordCount.util;
  */
 public class Logger {
 	public static enum DebugLevel {
-		NO_OUTPUT, CONSTRUCTOR
+		NO_OUTPUT, CONSTRUCTOR, TREEINSERT
 	};
 
 	private static DebugLevel debugLevel;

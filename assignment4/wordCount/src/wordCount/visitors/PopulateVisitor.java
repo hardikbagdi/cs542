@@ -29,11 +29,12 @@ public class PopulateVisitor implements Visitor {
 		StringTokenizer st;
 		try {
 			line = fileProcessor.getLine();
+			
 			while (line != null) {
 				st = new StringTokenizer(line);
 				while (st.hasMoreTokens()) {
 					singleWord = st.nextToken();
-					word = new Word(singleWord);
+					word = new Word(singleWord,1);
 					node = tree.getNode(word);
 					if (node == null) {
 						tree.insert(word);
@@ -42,6 +43,7 @@ public class PopulateVisitor implements Visitor {
 						word.setCount(word.getCount() + 1);
 					}
 				}
+				line = fileProcessor.getLine();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

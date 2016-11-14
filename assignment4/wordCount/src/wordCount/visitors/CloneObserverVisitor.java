@@ -3,6 +3,10 @@ package wordCount.visitors;
 import wordCount.store.Node;
 import wordCount.store.Tree;
 
+/**
+ * @author Hardik Bagdi (hbagdi1@binghamton.edu)
+ *
+ */
 public class CloneObserverVisitor implements Visitor {
 
 	private Tree tree, clonedTree;

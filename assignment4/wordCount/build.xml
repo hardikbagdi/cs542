@@ -42,7 +42,7 @@
 	<!-- for just java files use *.java -->
 
 	<target name="wordCount" depends="prepare">
-		<javac srcdir="${src}" includes="wordCount/**" excludes="**/package.html" destdir="${classes}" classpath="${classes}" debug="on" optimize="on" deprecation="off" />
+		<javac srcdir="${src}" includes="wordCount/**" excludes="**/package.html" destdir="${classes}" classpath="${classes}" debug="on" optimize="on" deprecation="off" includeantruntime="false" />
 	</target>
 
 

@@ -34,12 +34,11 @@ public class BinarySearchTree implements Tree, Cloneable {
 		visitor.visit(this);
 	}
 
-	public void insert(Word itemWordoInsert) {
-		insertHelper(root, itemWordoInsert);
+	public void insert(Word itemToInsert) {
+		Logger.writeMessage("BST:insert() called for "+itemToInsert, DebugLevel.TREEINSERT);
+		root = insertHelper(root, itemToInsert);
 	}
-
 	public void insert(Node nodeWordoInsert) {
-
 	}
 
 	private Node insertHelper(Node parent, Word itemToInsert) {
@@ -48,11 +47,12 @@ public class BinarySearchTree implements Tree, Cloneable {
 		int compare = parent.getData().compareTo(itemToInsert);
 		if (compare == 0) {
 			return parent;
-		} else if (compare < 0) {
-			return insertHelper(parent.getLeftChild(), itemToInsert);
+		} else if (compare > 0) {
+			parent.setLeftChild(insertHelper(parent.getLeftChild(), itemToInsert));
 		} else {
-			return insertHelper(parent.getRightChild(), itemToInsert);
+			parent.setRightChild( insertHelper(parent.getRightChild(), itemToInsert));
 		}
+		return parent;
 	}
 
 	public void remove(Node nodeWordoRemove) {
@@ -70,7 +70,7 @@ public class BinarySearchTree implements Tree, Cloneable {
 			throw new RuntimeException("Cannot delete the element which doesn't exist.");
 		}
 		int compare = parent.getData().compareTo(itemWordoRemove);
-		if (compare < 0) {
+		if (compare > 0) {
 			parent.setLeftChild(removeHelper(parent.getLeftChild(), itemWordoRemove));
 		} else if (compare > 0) {
 			parent.setRightChild(removeHelper(parent.getRightChild(), itemWordoRemove));
@@ -110,7 +110,7 @@ public class BinarySearchTree implements Tree, Cloneable {
 		int compare = parent.getData().compareTo(toCheck);
 		if (compare == 0) {
 			return true;
-		} else if (compare < 0) {
+		} else if (compare > 0) {
 			return containsHelper(parent.getLeftChild(), toCheck);
 		} else {
 			return containsHelper(parent.getRightChild(), toCheck);
@@ -126,10 +126,10 @@ public class BinarySearchTree implements Tree, Cloneable {
 		return contains(toCheck.getData());
 	}
 
-	public Node getNode(Word data) {
-		if (data == null)
+	public Node getNode(Word data_in) {
+		if (data_in == null)
 			return null;
-		return getNodeHelper(root, data);
+		return getNodeHelper(root, data_in);
 	}
 
 	private Node getNodeHelper(Node parent, Word toCheck) {
@@ -139,7 +139,7 @@ public class BinarySearchTree implements Tree, Cloneable {
 		int compare = parent.getData().compareTo(toCheck);
 		if (compare == 0) {
 			return parent;
-		} else if (compare < 0) {
+		} else if (compare > 0) {
 			return getNodeHelper(parent.getLeftChild(), toCheck);
 		} else {
 			return getNodeHelper(parent.getRightChild(), toCheck);

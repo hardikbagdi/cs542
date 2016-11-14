@@ -11,7 +11,7 @@ public class Word implements Comparable<Word>, Cloneable {
 
 	public Word(String word_in, long count_in) {
 		setWord(word_in);
-		setCount(0);
+		setCount(count_in);
 		setCharCount(word.length());
 	}
 

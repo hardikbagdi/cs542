@@ -88,7 +88,8 @@ public class FileProcessor {
 			throw new IllegalAccessException("Cant write to a file which is being read.");
 		}
 		try {
-			bufferedWriter.write(line_in);
+			bufferedWriter.write(line_in+"\n");
+			bufferedWriter.flush();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
