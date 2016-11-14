@@ -141,7 +141,6 @@ public class BinarySearchTree implements Tree, Cloneable {
 
 	@Override
 	public String toString() {
-		// WordODO Auto-generated method stub
 		return super.toString();
 	}
 }

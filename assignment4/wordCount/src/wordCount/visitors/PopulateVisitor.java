@@ -2,7 +2,9 @@ package wordCount.visitors;
 
 import java.util.StringTokenizer;
 
+import wordCount.store.Node;
 import wordCount.store.Tree;
+import wordCount.store.Word;
 import wordCount.util.FileProcessor;
 
 /**
@@ -21,6 +23,31 @@ public class PopulateVisitor implements Visitor {
 	@Override
 	public void visit(Tree tree_in) {
 		tree = tree_in;
-
+		String line, singleWord;
+		Word word;
+		Node node;
+		StringTokenizer st;
+		try {
+			line = fileProcessor.getLine();
+			while (line != null) {
+				st = new StringTokenizer(line);
+				while (st.hasMoreTokens()) {
+					singleWord = st.nextToken();
+					word = new Word(singleWord);
+					node = tree.getNode(word);
+					if (node == null) {
+						tree.insert(word);
+					} else {
+						word = node.getData();
+						word.setCount(word.getCount() + 1);
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+		}finally {
+			
+		}
 	}
 }

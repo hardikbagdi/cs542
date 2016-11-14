@@ -12,7 +12,7 @@ public class Word implements Comparable<Word> {
 	public Word(String word_in, long count_in) {
 		setWord(word_in);
 		setCount(0);
-		setCharCount(word_in.length());
+		setCharCount(word.length());
 	}
 
 	public Word(String word_in) {

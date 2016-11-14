@@ -9,6 +9,8 @@ import wordCount.visitors.Visitor;
 public interface Tree {
 
 	// tree api
+	public Node getRoot();
+	public void setRoot(Node node);
 	public void insert(Word word);
 
 	public void insert(Node node);
