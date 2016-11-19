@@ -1,6 +1,7 @@
 package wordCount.driver;
 
 import java.io.File;
+import java.util.Stack;
 
 import wordCount.store.BinarySearchTree;
 import wordCount.store.Node;
@@ -12,6 +13,7 @@ import wordCount.util.Logger;
 import wordCount.util.Logger.DebugLevel;
 import wordCount.visitors.CloneObserverVisitor;
 import wordCount.visitors.PopulateVisitor;
+import wordCount.visitors.UpdateVisitor;
 import wordCount.visitors.Visitor;
 import wordCount.visitors.WordCountVisitor;
 
@@ -32,8 +34,8 @@ public class Driver {
 			String inputFile = args[0];
 			String outputFile = args[1];
 			FileProcessor fileReader, fileWriter;
-			Tree tree;
-			Visitor visitor1, visitor2, visitor3;
+			Tree tree = null;
+			Visitor visitor = null;
 			int iterations = Integer.parseInt(args[2]);
 
 			long startTime = System.currentTimeMillis();
@@ -42,36 +44,31 @@ public class Driver {
 				fileReader = new FileProcessor(inputFile, FileMode.READ);
 				fileWriter = new FileProcessor(outputFile, FileMode.WRITE);
 				tree = new BinarySearchTree();
-				visitor1 = new PopulateVisitor(fileReader);
-				visitor2 = new WordCountVisitor(fileWriter);
-				visitor3 = new CloneObserverVisitor();
 				// code to visit with the PopulateVisitor
-				visitor1.visit(tree);
+				visitor = new PopulateVisitor(fileReader);
+				visitor.visit(tree);
 				// code to visit with the WordCountVisitor.
-				visitor2.visit(tree);
+				visitor = new WordCountVisitor(fileWriter);
+				visitor.visit(tree);
 			}
 			long finishTime = System.currentTimeMillis();
 			long avgTime = (finishTime - startTime) / (long) iterations;
 			System.out.println(avgTime);
 
 			// observer relation
-			// declare/instantiate the data structure and visitors
-			fileReader = new FileProcessor(inputFile, FileMode.READ);
-			fileWriter = new FileProcessor(outputFile, FileMode.WRITE);
-			tree = new BinarySearchTree();
-			visitor1 = new PopulateVisitor(fileReader);
-			visitor2 = new WordCountVisitor(fileWriter);
-			visitor3 = new CloneObserverVisitor();
-			// code to visit with the PopulateVisitor
-			visitor1.visit(tree);
-			// code to visit with the WordCountVisitor.
-			visitor2.visit(tree);
+			visitor = new CloneObserverVisitor();
 			// setup a clone tree
-			visitor3.visit(tree);
-			Tree clonedTree = ((CloneObserverVisitor) visitor3).getClonedTree();
-			
+			visitor.visit(tree);
+			Tree clonedTree = ((CloneObserverVisitor) visitor).getClonedTree();
+			int nodesToPrint = 50;
+			System.out.println("Original Tree:");
+			testObserver(tree, clonedTree, nodesToPrint);
+			// visitor to increment the count by 1 in the original tree
+			visitor = new UpdateVisitor();
+			visitor.visit(tree);
 			// code to change the original tree and then observer changes
-			testObserver(tree,clonedTree);
+			System.out.println("\n\nAfter updating main tree counts by 1:");
+			testObserver(tree, clonedTree, nodesToPrint);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -80,11 +77,39 @@ public class Driver {
 		}
 	}
 
-	private static void testObserver(Tree tree, Tree clonedTree) {
-		Node root = tree.getRoot();
-		Word word = root.getData();
-		root.setData(new Word(word.getWord(),100));
-		System.out.println(clonedTree.getRoot());
+	private static void testObserver(Tree tree, Tree clonedTree, int nodesToPrint) {
+		Node node = tree.getRoot();
+		Node clonedNode = clonedTree.getRoot();
+		Stack<Node> stack = new Stack<>();
+		Stack<Node> clonedStack = new Stack<>();
+		int i = 0;
+		// inorder
+		while (node != null) {
+			stack.push(node);
+			clonedStack.push(node);
+			node = node.getLeftChild();
+			clonedNode = clonedNode.getLeftChild();
+		}
+		while (stack.size() > 0) {
+			node = stack.pop();
+			clonedNode = clonedStack.pop();
+			if (i++ < nodesToPrint)
+				System.out.printf("%-40s  %s \n", node.getData(), clonedNode.getData());
+				//System.out.println(node.getData() + "\t\t" + clonedNode.getData());
+			else
+				return;
+			if (node.getRightChild() != null) {
+				node = node.getRightChild();
+				clonedNode = clonedNode.getRightChild();
+
+				while (node != null) {
+					stack.push(node);
+					clonedStack.push(node);
+					node = node.getLeftChild();
+					clonedNode = clonedNode.getLeftChild();
+				}
+			}
+		}
 	}
 
 	private static boolean validateArgs(String[] args) {

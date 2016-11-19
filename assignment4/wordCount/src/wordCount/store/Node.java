@@ -11,6 +11,7 @@ public class Node implements NodeObserver, NodeSubject, Cloneable {
 
 	private List<NodeObserver> listeners;
 	private Tree tree; // the tree which this node belongs to
+
 	public Tree getTree() {
 		return tree;
 	}
@@ -18,6 +19,7 @@ public class Node implements NodeObserver, NodeSubject, Cloneable {
 	public void setTree(Tree tree) {
 		this.tree = tree;
 	}
+
 	private Word data;
 	private Node left, right;
 
@@ -35,7 +37,7 @@ public class Node implements NodeObserver, NodeSubject, Cloneable {
 	public Object clone() throws CloneNotSupportedException {
 		Node cloned = (Node) super.clone();
 		cloned.data = ((Word) data.clone());
-		cloned.listeners = new ArrayList<>();//somehow clear the listners		
+		cloned.listeners = new ArrayList<>();// somehow clear the listners
 		// set left,right to null or not?
 		return cloned;
 	}
@@ -85,15 +87,16 @@ public class Node implements NodeObserver, NodeSubject, Cloneable {
 	@Override
 	public void update(Word updatedData) {
 		this.setData(updatedData);
-		if(data.compareTo(updatedData)!=0){
-			//the indexing key has changed; so remove and re-insert the node
+		if (data.compareTo(updatedData) != 0) {
+			// the indexing key has changed; so remove and re-insert the node
 			this.tree.remove(this);
 			this.tree.insert(this);
 		}
-			
+
 	}
+
 	@Override
 	public String toString() {
-		return "Node: "+data.toString();
+		return "Node: " + data.toString();
 	}
 }

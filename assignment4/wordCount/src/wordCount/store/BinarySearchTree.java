@@ -35,9 +35,10 @@ public class BinarySearchTree implements Tree, Cloneable {
 	}
 
 	public void insert(Word itemToInsert) {
-		Logger.writeMessage("BST:insert() called for "+itemToInsert, DebugLevel.TREEINSERT);
+		Logger.writeMessage("BST:insert() called for " + itemToInsert, DebugLevel.TREEINSERT);
 		root = insertHelper(root, itemToInsert);
 	}
+
 	public void insert(Node nodeWordoInsert) {
 	}
 
@@ -50,7 +51,7 @@ public class BinarySearchTree implements Tree, Cloneable {
 		} else if (compare > 0) {
 			parent.setLeftChild(insertHelper(parent.getLeftChild(), itemToInsert));
 		} else {
-			parent.setRightChild( insertHelper(parent.getRightChild(), itemToInsert));
+			parent.setRightChild(insertHelper(parent.getRightChild(), itemToInsert));
 		}
 		return parent;
 	}

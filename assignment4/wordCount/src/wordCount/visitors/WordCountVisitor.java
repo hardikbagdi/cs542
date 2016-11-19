@@ -46,7 +46,7 @@ public class WordCountVisitor implements Visitor {
 				stack.push(left);
 			if (right != null)
 				stack.push(right);
-			characters += cur.getData().getCharCount()*cur.getData().getCount();
+			characters += cur.getData().getCharCount() * cur.getData().getCount();
 			totalWords += cur.getData().getCount();
 			uniqueWords++;
 		}

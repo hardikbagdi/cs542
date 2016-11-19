@@ -50,7 +50,7 @@ public class Word implements Comparable<Word>, Cloneable {
 
 	@Override
 	public String toString() {
-		return "Word: " + this.word + " Count: " + count;
+		return "Word: " + this.word + ", Count: " + count;
 	}
 
 	@Override
