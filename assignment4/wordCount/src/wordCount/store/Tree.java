@@ -1,6 +1,6 @@
 package wordCount.store;
 
-import wordCount.visitors.Visitor;
+import wordCount.visitors.DSProcessingVisitorI;
 
 /**
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
@@ -28,7 +28,7 @@ public interface Tree {
 	public Node getNode(Word data);
 
 	// force accept() implementation
-	public void accept(Visitor visitor);
+	public void accept(DSProcessingVisitorI visitor);
 
 	// clone force
 	public Object clone() throws CloneNotSupportedException;

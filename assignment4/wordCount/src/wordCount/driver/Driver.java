@@ -14,7 +14,7 @@ import wordCount.util.Logger.DebugLevel;
 import wordCount.visitors.CloneObserverVisitor;
 import wordCount.visitors.PopulateVisitor;
 import wordCount.visitors.UpdateVisitor;
-import wordCount.visitors.Visitor;
+import wordCount.visitors.DSProcessingVisitorI;
 import wordCount.visitors.WordCountVisitor;
 
 /**
@@ -35,7 +35,7 @@ public class Driver {
 			String outputFile = args[1];
 			FileProcessor fileReader, fileWriter;
 			Tree tree = null;
-			Visitor visitor = null;
+			DSProcessingVisitorI visitor = null;
 			int iterations = Integer.parseInt(args[2]);
 
 			long startTime = System.currentTimeMillis();

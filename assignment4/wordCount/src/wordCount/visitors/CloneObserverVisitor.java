@@ -7,7 +7,7 @@ import wordCount.store.Tree;
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public class CloneObserverVisitor implements Visitor {
+public class CloneObserverVisitor implements DSProcessingVisitorI {
 
 	private Tree tree, clonedTree;
 

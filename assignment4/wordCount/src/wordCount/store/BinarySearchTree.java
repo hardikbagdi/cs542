@@ -2,7 +2,7 @@ package wordCount.store;
 
 import wordCount.util.Logger;
 import wordCount.util.Logger.DebugLevel;
-import wordCount.visitors.Visitor;
+import wordCount.visitors.DSProcessingVisitorI;
 
 /**
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
@@ -30,7 +30,7 @@ public class BinarySearchTree implements Tree, Cloneable {
 	}
 
 	@Override
-	public void accept(Visitor visitor) {
+	public void accept(DSProcessingVisitorI visitor) {
 		visitor.visit(this);
 	}
 

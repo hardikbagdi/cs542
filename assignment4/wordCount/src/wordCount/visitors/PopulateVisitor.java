@@ -11,7 +11,7 @@ import wordCount.util.FileProcessor;
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public class PopulateVisitor implements Visitor {
+public class PopulateVisitor implements DSProcessingVisitorI {
 
 	private FileProcessor fileProcessor;
 	private Tree tree;

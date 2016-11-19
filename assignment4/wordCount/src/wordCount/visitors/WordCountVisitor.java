@@ -10,7 +10,7 @@ import wordCount.util.FileProcessor;
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public class WordCountVisitor implements Visitor {
+public class WordCountVisitor implements DSProcessingVisitorI {
 
 	private FileProcessor fileProcessor;
 	private int uniqueWords, totalWords, characters;

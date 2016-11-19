@@ -8,7 +8,7 @@ import wordCount.store.Word;
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
-public class UpdateVisitor implements Visitor {
+public class UpdateVisitor implements DSProcessingVisitorI {
 
 	private Tree tree;
 
