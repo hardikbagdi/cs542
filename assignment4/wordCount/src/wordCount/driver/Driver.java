@@ -54,21 +54,23 @@ public class Driver {
 			long finishTime = System.currentTimeMillis();
 			long avgTime = (finishTime - startTime) / (long) iterations;
 			System.out.println(avgTime);
-
-			// observer relation
-			visitor = new CloneObserverVisitor();
-			// setup a clone tree
-			visitor.visit(tree);
-			Tree clonedTree = ((CloneObserverVisitor) visitor).getClonedTree();
-			int nodesToPrint = 50;
-			System.out.println("Original Tree:");
-			testObserver(tree, clonedTree, nodesToPrint);
-			// visitor to increment the count by 1 in the original tree
-			visitor = new UpdateVisitor();
-			visitor.visit(tree);
-			// code to change the original tree and then observer changes
-			System.out.println("\n\nAfter updating main tree counts by 1:");
-			testObserver(tree, clonedTree, nodesToPrint);
+			boolean observerTest = false;
+			if (observerTest) {
+				// observer relation
+				visitor = new CloneObserverVisitor();
+				// setup a clone tree
+				visitor.visit(tree);
+				Tree clonedTree = ((CloneObserverVisitor) visitor).getClonedTree();
+				int nodesToPrint = 50;
+				System.out.println("Original Tree:");
+				testObserver(tree, clonedTree, nodesToPrint);
+				// visitor to increment the count by 1 in the original tree
+				visitor = new UpdateVisitor();
+				visitor.visit(tree);
+				// code to change the original tree and then observer changes
+				System.out.println("\n\nAfter updating main tree counts by 1:");
+				testObserver(tree, clonedTree, nodesToPrint);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -95,7 +97,8 @@ public class Driver {
 			clonedNode = clonedStack.pop();
 			if (i++ < nodesToPrint)
 				System.out.printf("%-40s  %s \n", node.getData(), clonedNode.getData());
-				//System.out.println(node.getData() + "\t\t" + clonedNode.getData());
+			// System.out.println(node.getData() + "\t\t" +
+			// clonedNode.getData());
 			else
 				return;
 			if (node.getRightChild() != null) {
