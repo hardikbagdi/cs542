@@ -54,64 +54,21 @@ public class Driver {
 			long finishTime = System.currentTimeMillis();
 			long avgTime = (finishTime - startTime) / (long) iterations;
 			System.out.println(avgTime);
-			boolean observerTest = false;
-			if (observerTest) {
-				// observer relation
-				visitor = new CloneObserverVisitor();
-				// setup a clone tree
-				visitor.visit(tree);
-				Tree clonedTree = ((CloneObserverVisitor) visitor).getClonedTree();
-				int nodesToPrint = 50;
-				System.out.println("Original Tree:");
-				testObserver(tree, clonedTree, nodesToPrint);
-				// visitor to increment the count by 1 in the original tree
-				visitor = new UpdateVisitor();
-				visitor.visit(tree);
-				// code to change the original tree and then observer changes
-				System.out.println("\n\nAfter updating main tree counts by 1:");
-				testObserver(tree, clonedTree, nodesToPrint);
-			}
+			// observer relation
+			visitor = new CloneObserverVisitor();
+			// setup a clone tree
+			visitor.visit(tree);
+			Tree clonedTree = ((CloneObserverVisitor) visitor).getClonedTree();
+			// visitor to increment the count by 1 in the original tree
+			visitor = new UpdateVisitor();
+			visitor.visit(tree);
+			TestObserver testObserver = new TestObserver();
+			testObserver.verifyObserverRelation(tree, clonedTree);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
 		} finally {
 
-		}
-	}
-
-	private static void testObserver(Tree tree, Tree clonedTree, int nodesToPrint) {
-		Node node = tree.getRoot();
-		Node clonedNode = clonedTree.getRoot();
-		Stack<Node> stack = new Stack<>();
-		Stack<Node> clonedStack = new Stack<>();
-		int i = 0;
-		// inorder
-		while (node != null) {
-			stack.push(node);
-			clonedStack.push(node);
-			node = node.getLeftChild();
-			clonedNode = clonedNode.getLeftChild();
-		}
-		while (stack.size() > 0) {
-			node = stack.pop();
-			clonedNode = clonedStack.pop();
-			if (i++ < nodesToPrint)
-				System.out.printf("%-40s  %s \n", node.getData(), clonedNode.getData());
-			// System.out.println(node.getData() + "\t\t" +
-			// clonedNode.getData());
-			else
-				return;
-			if (node.getRightChild() != null) {
-				node = node.getRightChild();
-				clonedNode = clonedNode.getRightChild();
-
-				while (node != null) {
-					stack.push(node);
-					clonedStack.push(node);
-					node = node.getLeftChild();
-					clonedNode = clonedNode.getLeftChild();
-				}
-			}
 		}
 	}
 
