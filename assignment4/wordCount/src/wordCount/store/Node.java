@@ -87,12 +87,6 @@ public class Node implements NodeObserver, NodeSubject, Cloneable {
 	@Override
 	public void update(Word updatedData) {
 		this.setData(updatedData);
-		if (data.compareTo(updatedData) != 0) {
-			// the indexing key has changed; so remove and re-insert the node
-			this.tree.remove(this);
-			this.tree.insert(this);
-		}
-
 	}
 
 	@Override
