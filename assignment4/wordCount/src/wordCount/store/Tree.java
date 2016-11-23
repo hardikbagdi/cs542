@@ -13,13 +13,9 @@ public interface Tree {
 
 	public void setRoot(Node node);
 
-	public void insert(Word word);
-
-	public void insert(Node node);
+	public void insert(Word word);;
 
 	public void remove(Word word);
-
-	public void remove(Node node);
 
 	public boolean contains(Word word);
 

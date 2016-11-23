@@ -1,12 +1,8 @@
 package wordCount.driver;
 
 import java.io.File;
-import java.util.Stack;
-
 import wordCount.store.BinarySearchTree;
-import wordCount.store.Node;
 import wordCount.store.Tree;
-import wordCount.store.Word;
 import wordCount.util.FileProcessor;
 import wordCount.util.FileProcessor.FileMode;
 import wordCount.util.Logger;
@@ -31,9 +27,11 @@ public class Driver {
 				System.out.println(usageString);
 				return;
 			}
+
 			String inputFile = args[0];
 			String outputFile = args[1];
 			FileProcessor fileReader, fileWriter;
+
 			Tree tree = null;
 			DSProcessingVisitorI visitor = null;
 			int iterations = Integer.parseInt(args[2]);

@@ -39,9 +39,6 @@ public class BinarySearchTree implements Tree, Cloneable {
 		root = insertHelper(root, itemToInsert);
 	}
 
-	public void insert(Node nodeWordoInsert) {
-	}
-
 	private Node insertHelper(Node parent, Word itemToInsert) {
 		if (parent == null)
 			return new Node(itemToInsert, this);
@@ -54,10 +51,6 @@ public class BinarySearchTree implements Tree, Cloneable {
 			parent.setRightChild(insertHelper(parent.getRightChild(), itemToInsert));
 		}
 		return parent;
-	}
-
-	public void remove(Node nodeWordoRemove) {
-		remove(nodeWordoRemove.getData());
 	}
 
 	public void remove(Word itemWordoRemove) {

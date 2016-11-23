@@ -39,7 +39,7 @@ FileProcessor.java General purpose file reader and writer; thread=safe
 Logger.java General purpose logger
 
 visitors/
-CloneObserverVisitor.java  A visitor which clones a given tree data structure and setups observer relation between the orignal and cloned
+CloneObserverVisitor.java  A visitor which clones a given tree data structure and setups observer relation between the original and cloned
 PopulateVisitor.java A visitor which reads from a FileProcessor and populates a data structure
 UpdateVisitor.java A visitor which tests the observer relation set by CloneObserverVisitor.java by incrementing counts by 1 and writing output to files
 Visitor.java The visitor interface
@@ -47,6 +47,9 @@ WordCountVisitor.java Visitor which reads generates counts given a data structur
 
 SAMPLE OUTPUT:
 25 (+3 files)
+
+DATA STRUCTURES:
+A Binary Search Tree has been used to store the word count of each word. The ASCII value of words is used to index the data into the tree.
 
 TO COMPILE:
 ant all

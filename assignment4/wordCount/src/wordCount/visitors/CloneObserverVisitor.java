@@ -19,10 +19,10 @@ public class CloneObserverVisitor implements DSProcessingVisitorI {
 	public void visit(Tree tree_in) {
 		try {
 			tree = tree_in;
-			if(tree == null)
+			if (tree == null)
 				return;
 			clonedTree = (Tree) tree.clone();
-			if(tree.getRoot() == null)
+			if (tree.getRoot() == null)
 				return;
 			Node clonedRoot = (Node) (tree.getRoot().clone());
 			clonedTree.setRoot(clonedRoot);

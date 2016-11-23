@@ -22,7 +22,7 @@ public class WordCountVisitor implements DSProcessingVisitorI {
 	@Override
 	public void visit(Tree tree) {
 		try {
-			if(tree != null  && tree.getRoot() != null){
+			if (tree != null && tree.getRoot() != null) {
 				parseTree(tree);
 			}
 			printToFile();

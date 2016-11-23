@@ -19,7 +19,7 @@ public class UpdateVisitor implements DSProcessingVisitorI {
 	}
 
 	private void updateCounts(Node node) {
-		if (node == null){
+		if (node == null) {
 			return;
 		}
 		Word word = node.getData();
