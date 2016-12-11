@@ -6,6 +6,7 @@ import genericDeser.fileOperations.FileProcessor;
 import genericDeser.fileOperations.FileProcessor.FileMode;
 import genericDeser.util.Logger;
 import genericDeser.util.Logger.DebugLevel;
+import genericDeser.util.PopulateObjects;
 
 /**
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
@@ -18,7 +19,7 @@ public class Driver {
 	public static void main(String[] args) {
 		String inputFile = args[0];
 		FileProcessor fileReader;
-
+		PopulateObjects populateObjects;
 		try {
 			if (!validateArgs(args)) {
 				System.out.println(usageString);
@@ -26,6 +27,13 @@ public class Driver {
 			}
 			Logger.setDebugValue(DebugLevel.NO_OUTPUT);
 			fileReader = new FileProcessor(inputFile, FileMode.READ);
+			populateObjects = new PopulateObjects();
+			populateObjects.deserObjects(fileReader);
+
+			System.out.println("Number of unique First objects: " + populateObjects.uniqueNumOfFirstObjects());
+			System.out.println("Total Number of First objects: " + populateObjects.totalNumOfFirstObjects());
+			System.out.println("Number of unique Second objects: " + populateObjects.uniqueNumOfSecondObjects());
+			System.out.println("Total Number of Second objects: " + populateObjects.totalNumOfSecondObjects());
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
