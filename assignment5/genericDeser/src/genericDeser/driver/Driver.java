@@ -1,13 +1,56 @@
 package genericDeser.driver;
 
+import java.io.File;
+
+import genericDeser.fileOperations.FileProcessor;
+import genericDeser.fileOperations.FileProcessor.FileMode;
+import genericDeser.util.Logger;
+import genericDeser.util.Logger.DebugLevel;
+
 /**
  * @author Hardik Bagdi (hbagdi1@binghamton.edu)
  *
  */
 public class Driver {
-	private static String usageString = "Usage: java Driver <input-file> <output-file> <iteration-count>";
+	private static String usageString = "Usage: java Driver <input-file> <logger-value(optional)>";
+	private static int debugLevel = -1;
 
 	public static void main(String[] args) {
-		System.out.println("Hello World");
+		String inputFile = args[0];
+		FileProcessor fileReader;
+
+		try {
+			if (!validateArgs(args)) {
+				System.out.println(usageString);
+				return;
+			}
+			Logger.setDebugValue(DebugLevel.NO_OUTPUT);
+			fileReader = new FileProcessor(inputFile, FileMode.READ);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+		} finally {
+
+		}
+	}
+
+	private static boolean validateArgs(String[] args) {
+		try {
+			if (args.length < 1) {
+				return false;
+			}
+			if (!(new File(args[0])).canRead()) {
+				System.out.println("Input file is unreadable/doesn't exist.");
+				return false;
+			}
+			debugLevel = (int) Integer.parseInt(args[1]);
+			return true;
+		} catch (NumberFormatException exception) {
+			debugLevel = 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+		return true;
 	}
 }
