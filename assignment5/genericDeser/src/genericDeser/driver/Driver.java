@@ -13,8 +13,7 @@ import genericDeser.util.PopulateObjects;
  *
  */
 public class Driver {
-	private static String usageString = "Usage: java Driver <input-file> <logger-value(optional)>";
-	private static int debugLevel = -1;
+	private static String usageString = "Usage: java Driver <input-file> <logger-value>";
 
 	public static void main(String[] args) {
 		String inputFile = args[0];
@@ -44,17 +43,18 @@ public class Driver {
 
 	private static boolean validateArgs(String[] args) {
 		try {
-			if (args.length < 1) {
+			if (args.length != 2) {
 				return false;
 			}
 			if (!(new File(args[0])).canRead()) {
 				System.out.println("Input file is unreadable/doesn't exist.");
 				return false;
 			}
-			debugLevel = (int) Integer.parseInt(args[1]);
+			Integer.parseInt(args[1]);
 			return true;
 		} catch (NumberFormatException exception) {
-			debugLevel = 0;
+			System.out.println("Please provide a natural number for iteration count.");
+			System.exit(1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);

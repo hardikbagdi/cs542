@@ -50,20 +50,30 @@ public class First {
 
 	@Override
 	public boolean equals(Object obj) {
+		if (obj == null)
+			return false;
 		if (obj == this)
 			return true;
-		if (!(obj instanceof Second)) {
+		if (!(obj instanceof First)) {
 			return false;
 		}
 		First first = (First) obj;
 
-		return first.getFloatValue() == FloatValue && first.getIntValue() == IntValue
-				&& first.getShortValue() == ShortValue && first.getStringValue() == StringValue;
+		Float f1 = new Float(FloatValue);
+		Float f2 = new Float(first.getFloatValue());
+		return f1.equals(f2) && first.getIntValue() == IntValue && first.getShortValue() == ShortValue
+				&& first.getStringValue() == StringValue;
 	}
 
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
-		return super.hashCode();
+		// https://www.mkyong.com/java/java-how-to-overrides-equals-and-hashcode/
+		int result = 17;
+		result = 31 * result + IntValue;
+		result = 31 * result + new Float(FloatValue).hashCode();
+		result = 31 * result + (int) ShortValue;
+		if (StringValue != null)
+			result = 31 * result + StringValue.hashCode();
+		return result;
 	}
 }

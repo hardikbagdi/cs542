@@ -40,6 +40,8 @@ public class Second {
 
 	@Override
 	public boolean equals(Object obj) {
+		if (obj == null)
+			return false;
 		if (obj == this)
 			return true;
 		if (!(obj instanceof Second)) {
@@ -53,7 +55,14 @@ public class Second {
 
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
-		return super.hashCode();
+		// https://www.mkyong.com/java/java-how-to-overrides-equals-and-hashcode/
+		int result = 17;
+		result = 31 * result + IntValue;
+		result = 31 * result + new Double(DoubleValue).hashCode();
+		if (BooleanValue)
+			result = 31 * result + 23;
+		else
+			result = 31 * result + 42;
+		return result;
 	}
 }
