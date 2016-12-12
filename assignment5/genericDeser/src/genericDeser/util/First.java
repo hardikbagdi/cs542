@@ -41,4 +41,29 @@ public class First {
 	public void setShortValue(short shortValue) {
 		ShortValue = shortValue;
 	}
+
+	@Override
+	public String toString() {
+		return this.getClass().getName() + " " + getShortValue() + " " + getIntValue() + " " + getFloatValue() + " "
+				+ getStringValue();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this)
+			return true;
+		if (!(obj instanceof Second)) {
+			return false;
+		}
+		First first = (First) obj;
+
+		return first.getFloatValue() == FloatValue && first.getIntValue() == IntValue
+				&& first.getShortValue() == ShortValue && first.getStringValue() == StringValue;
+	}
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
 }

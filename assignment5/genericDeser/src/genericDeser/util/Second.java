@@ -17,7 +17,7 @@ public class Second {
 		IntValue = intValue;
 	}
 
-	public boolean isBooleanValue() {
+	public boolean getBooleanValue() {
 		return BooleanValue;
 	}
 
@@ -33,4 +33,27 @@ public class Second {
 		DoubleValue = doubleValue;
 	}
 
+	@Override
+	public String toString() {
+		return this.getClass().getName() + " " + BooleanValue + " " + getIntValue() + " " + getDoubleValue();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this)
+			return true;
+		if (!(obj instanceof Second)) {
+			return false;
+		}
+		Second second = (Second) obj;
+
+		return second.getBooleanValue() == BooleanValue && second.getIntValue() == IntValue
+				&& second.getDoubleValue() == DoubleValue;
+	}
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
 }
