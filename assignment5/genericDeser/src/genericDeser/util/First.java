@@ -57,12 +57,15 @@ public class First {
 		if (!(obj instanceof First)) {
 			return false;
 		}
+		boolean equal = false;
 		First first = (First) obj;
 
 		Float f1 = new Float(FloatValue);
 		Float f2 = new Float(first.getFloatValue());
-		return f1.equals(f2) && first.getIntValue() == IntValue && first.getShortValue() == ShortValue
-				&& first.getStringValue() == StringValue;
+		equal = f1.equals(f2) && first.getIntValue() == IntValue && first.getShortValue() == ShortValue;
+		if(first.getStringValue() != null)
+			equal = equal && this.getStringValue().equals(first.getStringValue());
+		return equal;
 	}
 
 	@Override

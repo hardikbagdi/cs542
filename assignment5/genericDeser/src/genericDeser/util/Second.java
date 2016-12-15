@@ -48,9 +48,11 @@ public class Second {
 			return false;
 		}
 		Second second = (Second) obj;
+		Double d1 = new Double(DoubleValue);
+		Double d2 = new Double(second.getDoubleValue());
 
 		return second.getBooleanValue() == BooleanValue && second.getIntValue() == IntValue
-				&& second.getDoubleValue() == DoubleValue;
+				&&equals(d1.equals(d2));
 	}
 
 	@Override
