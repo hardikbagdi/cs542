@@ -52,7 +52,7 @@ public class Second {
 		Double d2 = new Double(second.getDoubleValue());
 
 		return second.getBooleanValue() == BooleanValue && second.getIntValue() == IntValue
-				&&equals(d1.equals(d2));
+				&& d1.equals(d2);
 	}
 
 	@Override
